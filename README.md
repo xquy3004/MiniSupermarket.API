@@ -1,5 +1,7 @@
 ﻿Hệ Thống Quản Lý Siêu Thị Mini (Mini Supermarket System)
-Sinh viên: Nguyễn Xuân Quý — MSSV: 2124110252 Lớp: CCQ2411C
+Sinh viên: Nguyễn Xuân Quý 
+MSSV: 2124110252
+Lớp: CCQ2411C
 
 Đồ án môn: Lập trình Ứng dụng .NET Core
 
