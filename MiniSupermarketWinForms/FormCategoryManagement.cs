@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,32 +12,44 @@ namespace MiniSupermarketWinForms
     {
         // Địa chỉ Web API
         // PHẢI sửa port cho đúng với Swagger của bạn
-        private static readonly HttpClient _client = new HttpClient
-        {
-            BaseAddress = new Uri("https://localhost:7006/api/")
-        };
+        private const string ApiBaseAddress = "http://localhost:5000/api/";
 
         public FormCategoryManagement()
         {
             InitializeComponent();
         }
 
-        // Khi Form mở lên
+        
+        private HttpClient GetAuthenticatedClient()
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri(ApiBaseAddress)
+            };
+
+            if (!string.IsNullOrEmpty(SessionManager.JwtToken))
+            {
+                client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", SessionManager.JwtToken);
+            }
+
+            return client;
+        }
+
+   
         private async void FormCategoryManagement_Load(object sender, EventArgs e)
         {
             await LoadDataAsync();
         }
 
-        // =========================================================
-        // LOAD DANH SÁCH
-        // GET /api/categories
-        // =========================================================
+     
         private async Task LoadDataAsync()
         {
             try
             {
+                using var client = GetAuthenticatedClient();
                 var categories =
-                    await _client.GetFromJsonAsync<List<CategoryDto>>("categories");
+                    await client.GetFromJsonAsync<List<CategoryDto>>("categories");
 
                 dgvCategories.DataSource = categories;
             }
@@ -50,9 +63,7 @@ namespace MiniSupermarketWinForms
             }
         }
 
-        // =========================================================
-        // CLICK VÀO DÒNG TRÊN DATAGRIDVIEW
-        // =========================================================
+   
         private void dgvCategories_CellClick(
             object sender,
             DataGridViewCellEventArgs e)
@@ -72,9 +83,7 @@ namespace MiniSupermarketWinForms
                 row.Cells["Description"].Value?.ToString() ?? "";
         }
 
-        // =========================================================
-        // NÚT TẢI LẠI
-        // =========================================================
+       
         private async void btnLoad_Click(object sender, EventArgs e)
         {
             await LoadDataAsync();
@@ -84,10 +93,7 @@ namespace MiniSupermarketWinForms
         }
 
 
-        // =========================================================
-        // THÊM MỚI
-        // POST /api/categories
-        // =========================================================
+      
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtCategoryName.Text))
@@ -109,8 +115,9 @@ namespace MiniSupermarketWinForms
                     Description = txtDescription.Text.Trim()
                 };
 
+                using var client = GetAuthenticatedClient();
                 var response =
-                    await _client.PostAsJsonAsync(
+                    await client.PostAsJsonAsync(
                         "categories",
                         newCategory);
 
@@ -147,10 +154,6 @@ namespace MiniSupermarketWinForms
             }
         }
 
-        // =========================================================
-        // CẬP NHẬT
-        // PUT /api/categories/{id}
-        // =========================================================
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtId.Text, out int id))
@@ -184,8 +187,9 @@ namespace MiniSupermarketWinForms
                     Description = txtDescription.Text.Trim()
                 };
 
+                using var client = GetAuthenticatedClient();
                 var response =
-                    await _client.PutAsJsonAsync(
+                    await client.PutAsJsonAsync(
                         $"categories/{id}",
                         updateCategory);
 
@@ -222,10 +226,7 @@ namespace MiniSupermarketWinForms
             }
         }
 
-        // =========================================================
-        // XÓA
-        // DELETE /api/categories/{id}
-        // =========================================================
+
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtId.Text, out int id))
@@ -250,8 +251,9 @@ namespace MiniSupermarketWinForms
 
             try
             {
+                using var client = GetAuthenticatedClient();
                 var response =
-                    await _client.DeleteAsync($"categories/{id}");
+                    await client.DeleteAsync($"categories/{id}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -286,10 +288,6 @@ namespace MiniSupermarketWinForms
             }
         }
 
-        // =========================================================
-        // TÌM KIẾM
-        // GET /api/categories/search?keyword=...
-        // =========================================================
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtKeyword.Text.Trim();
@@ -305,8 +303,9 @@ namespace MiniSupermarketWinForms
                 string url =
                     $"categories/search?keyword={Uri.EscapeDataString(keyword)}";
 
+                using var client = GetAuthenticatedClient();
                 var result =
-                    await _client.GetFromJsonAsync<List<CategoryDto>>(url);
+                    await client.GetFromJsonAsync<List<CategoryDto>>(url);
 
                 dgvCategories.DataSource = result;
             }
@@ -320,9 +319,6 @@ namespace MiniSupermarketWinForms
             }
         }
 
-        // =========================================================
-        // XÓA TRẮNG FORM
-        // =========================================================
         private void ClearInputs()
         {
             txtId.Clear();
@@ -331,7 +327,7 @@ namespace MiniSupermarketWinForms
         }
     }
 
-    // DTO nhận dữ liệu từ API
+
     public class CategoryDto
     {
         public int CategoryId { get; set; }

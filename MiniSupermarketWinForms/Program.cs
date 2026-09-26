@@ -16,7 +16,8 @@ namespace MiniSupermarketWinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormCategoryManagement());
+            Application.Run(new FormLogin());
         }
     }
 }
+

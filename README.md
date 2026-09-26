@@ -106,3 +106,4 @@ Thực hiện đầy đủ Thêm, Sửa, Xóa, Tìm kiếm trên giao diện và
 Dữ liệu hiện lưu In-Memory (static List), sẽ mất khi khởi động lại API — phục vụ mục đích học tập.
 Port mặc định của Backend: HTTPS 7065, HTTP 5207. Nếu thay đổi port, cần cập nhật BaseAddress ở 2 form trong project FE.
 Các bước tiếp theo của đồ án: tích hợp SQL Server + Entity Framework Core, bảo mật phân quyền nâng cao (JWT).
+

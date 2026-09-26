@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "MiniSupermarket.API.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "MiniSupermarket.API.Controllers.LoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MiniSupermarket.API.Controllers.CategoriesController",
     "Method": "GetAll",
     "RelativePath": "api/Categories",
@@ -80,6 +96,16 @@
   },
   {
     "ContainingType": "MiniSupermarket.API.Controllers.CategoriesController",
+    "Method": "GetAdminDashboard",
+    "RelativePath": "api/Categories/admin-dashboard",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MiniSupermarket.API.Controllers.CategoriesController",
     "Method": "Search",
     "RelativePath": "api/Categories/search",
     "HttpMethod": "GET",
@@ -92,6 +118,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MiniSupermarket.API.Controllers.CategoriesController",
+    "Method": "GetStaffPos",
+    "RelativePath": "api/Categories/staff-pos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
