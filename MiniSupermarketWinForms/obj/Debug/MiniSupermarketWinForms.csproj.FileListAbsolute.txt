@@ -30,3 +30,4 @@ D:\MiniSupermarket.API\MiniSupermarketWinForms\bin\Debug\System.Text.Json.xml
 D:\MiniSupermarket.API\MiniSupermarketWinForms\bin\Debug\System.Threading.Tasks.Extensions.xml
 D:\MiniSupermarket.API\MiniSupermarketWinForms\obj\Debug\MiniSupe.41B11AD2.Up2Date
 D:\MiniSupermarket.API\MiniSupermarketWinForms\obj\Debug\MiniSupermarketWinForms.FormLogin.resources
+D:\MiniSupermarket.API\MiniSupermarketWinForms\obj\Debug\MiniSupermarketWinForms.FormCustomerManagement.resources

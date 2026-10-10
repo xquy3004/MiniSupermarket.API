@@ -17,9 +17,20 @@ namespace MiniSupermarketWinForms
         public FormCategoryManagement()
         {
             InitializeComponent();
+
+            // Thêm nút "Quản lý khách hàng" vào thanh công cụ phía trên cùng
+            var btnCustomers = new ToolStripButton("Quản lý khách hàng");
+            btnCustomers.Click += (s, e) =>
+            {
+                using (var f = new FormCustomerManagement())
+                {
+                    f.ShowDialog();
+                }
+            };
+            toolStrip1.Items.Add(btnCustomers);
         }
 
-        
+
         private HttpClient GetAuthenticatedClient()
         {
             var client = new HttpClient
