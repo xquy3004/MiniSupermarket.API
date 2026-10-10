@@ -49,18 +49,35 @@ namespace MiniSupermarketWinForms
                     // Trích xuất Token và Role lưu vào lớp tĩnh SessionManager dùng chung toàn ứng dụng
                     SessionManager.JwtToken = doc.RootElement.GetProperty("token").GetString() ?? string.Empty;
                     SessionManager.CurrentRole = doc.RootElement.GetProperty("role").GetString() ?? string.Empty;
+                    SessionManager.CurrentUsername = username;
 
                     MessageBox.Show($"Đăng nhập thành công với quyền: {SessionManager.CurrentRole}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Mở Form quản lý chính (FormCategoryManagement) và ẩn Form đăng nhập đi
-                    FormCategoryManagement mainForm = new FormCategoryManagement();
+                    // Mở khung điều khiển chính (FormMainShell) và ẩn Form đăng nhập
+                    FormMainShell shell = new FormMainShell();
                     this.Hide();
-                    mainForm.ShowDialog();
-                    this.Close(); // Đóng hẳn ứng dụng khi form chính tắt
+                    shell.ShowDialog();
+
+                    if (shell.LoggedOut)
+                    {
+                        // Người dùng bấm Đăng xuất: quay lại màn hình đăng nhập
+                        txtPass.Clear();
+                        this.Show();
+                    }
+                    else
+                    {
+                        this.Close(); // Đóng hẳn ứng dụng
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                    {
+                        MessageBox.Show("Tài khoản này đã bị khóa. Vui lòng liên hệ quản trị viên!", "Tài khoản bị khóa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)

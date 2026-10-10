@@ -119,6 +119,7 @@ namespace MiniSupermarket.API.Controllers
 
         // 6. DELETE: Xóa nhóm hàng
         [HttpDelete("{id}")]
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -6,7 +6,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-using System.ComponentModel;
 
 namespace MiniSupermarketWinForms
 {
@@ -47,146 +46,98 @@ namespace MiniSupermarketWinForms
         // ===== Thiết kế giao diện bằng code =====
         private void InitializeComponent()
         {
-            this.lblKeyword = new Label();
-            this.txtKeyword = new TextBox();
-            this.btnSearch = new Button();
-            this.dgvCustomers = new DataGridView();
-
-            this.lblCustomerId = new Label();
-            this.txtCustomerId = new TextBox();
-            this.lblCustomerName = new Label();
-            this.txtCustomerName = new TextBox();
-            this.lblPhoneNumber = new Label();
-            this.txtPhoneNumber = new TextBox();
-            this.lblAddress = new Label();
-            this.txtAddress = new TextBox();
-            this.lblRewardPoints = new Label();
-            this.txtRewardPoints = new TextBox();
-            this.lblMembershipRank = new Label();
-            this.txtMembershipRank = new TextBox();
-
-            this.btnLoad = new Button();
-            this.btnAdd = new Button();
-            this.btnUpdate = new Button();
-            this.btnDelete = new Button();
-
-            ((ISupportInitialize)(this.dgvCustomers)).BeginInit();
-            this.SuspendLayout();
-
-            // Tìm kiếm
-            this.lblKeyword.AutoSize = true;
-            this.lblKeyword.Location = new Point(20, 20);
-            this.lblKeyword.Text = "Tìm kiếm:";
-
-            this.txtKeyword.Location = new Point(90, 17);
-            this.txtKeyword.Size = new Size(200, 23);
-
-            this.btnSearch.Location = new Point(300, 15);
-            this.btnSearch.Size = new Size(90, 27);
-            this.btnSearch.Text = "Tìm kiếm";
-            this.btnSearch.Click += new EventHandler(this.btnSearch_Click);
-
-            // DataGridView
-            this.dgvCustomers.Location = new Point(20, 55);
-            this.dgvCustomers.Size = new Size(560, 380);
-            this.dgvCustomers.Anchor = (AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
-            this.dgvCustomers.AllowUserToAddRows = false;
-            this.dgvCustomers.ReadOnly = true;
-            this.dgvCustomers.CellClick += new DataGridViewCellEventHandler(this.dgvCustomers_CellClick);
-
-            // Cột nhập liệu bên phải
-            int labelX = 610;
-            int inputX = 700;
-            int startY = 55;
-            int stepY = 40;
-
-            this.lblCustomerId.AutoSize = true;
-            this.lblCustomerId.Location = new Point(labelX, startY);
-            this.lblCustomerId.Text = "Mã KH:";
-            this.txtCustomerId.Location = new Point(inputX, startY - 3);
-            this.txtCustomerId.Size = new Size(150, 23);
-            this.txtCustomerId.ReadOnly = true;
-
-            this.lblCustomerName.AutoSize = true;
-            this.lblCustomerName.Location = new Point(labelX, startY + stepY);
-            this.lblCustomerName.Text = "Tên KH:";
-            this.txtCustomerName.Location = new Point(inputX, startY + stepY - 3);
-            this.txtCustomerName.Size = new Size(150, 23);
-
-            this.lblPhoneNumber.AutoSize = true;
-            this.lblPhoneNumber.Location = new Point(labelX, startY + stepY * 2);
-            this.lblPhoneNumber.Text = "SĐT:";
-            this.txtPhoneNumber.Location = new Point(inputX, startY + stepY * 2 - 3);
-            this.txtPhoneNumber.Size = new Size(150, 23);
-
-            this.lblAddress.AutoSize = true;
-            this.lblAddress.Location = new Point(labelX, startY + stepY * 3);
-            this.lblAddress.Text = "Địa chỉ:";
-            this.txtAddress.Location = new Point(inputX, startY + stepY * 3 - 3);
-            this.txtAddress.Size = new Size(150, 23);
-
-            this.lblRewardPoints.AutoSize = true;
-            this.lblRewardPoints.Location = new Point(labelX, startY + stepY * 4);
-            this.lblRewardPoints.Text = "Điểm t.lũy:";
-            this.txtRewardPoints.Location = new Point(inputX, startY + stepY * 4 - 3);
-            this.txtRewardPoints.Size = new Size(150, 23);
-
-            this.lblMembershipRank.AutoSize = true;
-            this.lblMembershipRank.Location = new Point(labelX, startY + stepY * 5);
-            this.lblMembershipRank.Text = "Hạng thẻ:";
-            this.txtMembershipRank.Location = new Point(inputX, startY + stepY * 5 - 3);
-            this.txtMembershipRank.Size = new Size(150, 23);
-
-            // Nút chức năng
-            int btnY = startY + stepY * 6 + 10;
-
-            this.btnLoad.Location = new Point(labelX, btnY);
-            this.btnLoad.Size = new Size(240, 32);
-            this.btnLoad.Text = "Tải danh sách";
-            this.btnLoad.Click += new EventHandler(this.btnLoad_Click);
-
-            this.btnAdd.Location = new Point(labelX, btnY + 40);
-            this.btnAdd.Size = new Size(240, 32);
-            this.btnAdd.Text = "Thêm mới";
-            this.btnAdd.Click += new EventHandler(this.btnAdd_Click);
-
-            this.btnUpdate.Location = new Point(labelX, btnY + 80);
-            this.btnUpdate.Size = new Size(240, 32);
-            this.btnUpdate.Text = "Cập nhật";
-            this.btnUpdate.Click += new EventHandler(this.btnUpdate_Click);
-
-            this.btnDelete.Location = new Point(labelX, btnY + 120);
-            this.btnDelete.Size = new Size(240, 32);
-            this.btnDelete.Text = "Xóa";
-            this.btnDelete.Click += new EventHandler(this.btnDelete_Click);
-
-            // Form
-            this.ClientSize = new Size(970, 460);
             this.Text = "Quản lý Khách hàng";
+            this.Size = new Size(1100, 600);
+            this.BackColor = Color.FromArgb(244, 245, 247);
+            this.Font = new Font("Segoe UI", 10F);
 
-            this.Controls.Add(this.lblKeyword);
-            this.Controls.Add(this.txtKeyword);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.dgvCustomers);
-            this.Controls.Add(this.lblCustomerId);
-            this.Controls.Add(this.txtCustomerId);
-            this.Controls.Add(this.lblCustomerName);
-            this.Controls.Add(this.txtCustomerName);
-            this.Controls.Add(this.lblPhoneNumber);
-            this.Controls.Add(this.txtPhoneNumber);
-            this.Controls.Add(this.lblAddress);
-            this.Controls.Add(this.txtAddress);
-            this.Controls.Add(this.lblRewardPoints);
-            this.Controls.Add(this.txtRewardPoints);
-            this.Controls.Add(this.lblMembershipRank);
-            this.Controls.Add(this.txtMembershipRank);
-            this.Controls.Add(this.btnLoad);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnDelete);
+            // --- Thanh tìm kiếm (trên cùng) ---
+            var panelTop = new Panel { Dock = DockStyle.Top, Height = 60, BackColor = Color.White };
 
-            ((ISupportInitialize)(this.dgvCustomers)).EndInit();
-            this.ResumeLayout(false);
+            lblKeyword = new Label { Text = "Tìm kiếm:", AutoSize = true, Location = new Point(15, 20) };
+            txtKeyword = new TextBox { Location = new Point(95, 17), Width = 260 };
+            txtKeyword.KeyDown += txtKeyword_KeyDown;
+            btnSearch = CreateButton("Tìm kiếm", Color.FromArgb(41, 100, 180), 370, 14, 110, 32);
+            btnSearch.Click += btnSearch_Click;
+
+            panelTop.Controls.AddRange(new Control[] { lblKeyword, txtKeyword, btnSearch });
+
+            // --- Bảng khách hàng (lấp đầy vùng còn lại) ---
+            dgvCustomers = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                MultiSelect = false,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                BackgroundColor = Color.White,
+                RowHeadersVisible = false
+            };
+            dgvCustomers.CellClick += dgvCustomers_CellClick;
+
+            // --- Khung nhập liệu (bên phải) ---
+            var panelDetail = new Panel
+            {
+                Dock = DockStyle.Right,
+                Width = 340,
+                BackColor = Color.White,
+                AutoScroll = true
+            };
+
+            txtCustomerId = new TextBox { ReadOnly = true };
+            txtCustomerName = new TextBox();
+            txtPhoneNumber = new TextBox();
+            txtAddress = new TextBox();
+            txtRewardPoints = new TextBox();
+            txtMembershipRank = new TextBox();
+
+            lblCustomerId = AddField(panelDetail, "Mã KH:", txtCustomerId, 20);
+            lblCustomerName = AddField(panelDetail, "Tên KH:", txtCustomerName, 65);
+            lblPhoneNumber = AddField(panelDetail, "SĐT:", txtPhoneNumber, 110);
+            lblAddress = AddField(panelDetail, "Địa chỉ:", txtAddress, 155);
+            lblRewardPoints = AddField(panelDetail, "Điểm tích lũy:", txtRewardPoints, 200);
+            lblMembershipRank = AddField(panelDetail, "Hạng thẻ:", txtMembershipRank, 245);
+
+            btnLoad = CreateButton("Tải danh sách", Color.FromArgb(120, 120, 120), 15, 310, 305, 36);
+            btnAdd = CreateButton("Thêm mới", Color.FromArgb(39, 174, 96), 15, 354, 305, 36);
+            btnUpdate = CreateButton("Cập nhật", Color.FromArgb(41, 100, 180), 15, 398, 305, 36);
+            btnDelete = CreateButton("Xóa", Color.FromArgb(192, 57, 43), 15, 442, 305, 36);
+            btnLoad.Click += btnLoad_Click;
+            btnAdd.Click += btnAdd_Click;
+            btnUpdate.Click += btnUpdate_Click;
+            btnDelete.Click += btnDelete_Click;
+            panelDetail.Controls.AddRange(new Control[] { btnLoad, btnAdd, btnUpdate, btnDelete });
+
+            // --- Ghép vào Form (thứ tự quyết định cách Dock) ---
+            this.Controls.Add(dgvCustomers);
+            this.Controls.Add(panelDetail);
+            this.Controls.Add(panelTop);
+            dgvCustomers.BringToFront();
+        }
+
+        // Thêm một cặp nhãn + ô nhập vào khung bên phải
+        private Label AddField(Panel parent, string caption, TextBox input, int top)
+        {
+            var lbl = new Label { Text = caption, AutoSize = true, Location = new Point(15, top + 4) };
+            input.Location = new Point(125, top);
+            input.Width = 195;
+            parent.Controls.Add(lbl);
+            parent.Controls.Add(input);
+            return lbl;
+        }
+
+        private Button CreateButton(string text, Color color, int x, int y, int w, int h)
+        {
+            var btn = new Button
+            {
+                Text = text,
+                Location = new Point(x, y),
+                Size = new Size(w, h),
+                Cursor = Cursors.Hand
+            };
+            return btn;
         }
 
         // ===== Xử lý logic =====
@@ -212,6 +163,25 @@ namespace MiniSupermarketWinForms
             await LoadDataAsync();
         }
 
+        // Đổ dữ liệu vào bảng rồi đặt tiêu đề cột tiếng Việt
+        private void BindGrid(List<CustomerDto> customers)
+        {
+            dgvCustomers.DataSource = customers;
+
+            SetHeader("CustomerId", "Mã KH");
+            SetHeader("CustomerName", "Tên khách hàng");
+            SetHeader("PhoneNumber", "Số điện thoại");
+            SetHeader("Address", "Địa chỉ");
+            SetHeader("RewardPoints", "Điểm tích lũy");
+            SetHeader("MembershipRank", "Hạng thẻ");
+        }
+
+        private void SetHeader(string columnName, string text)
+        {
+            var col = dgvCustomers.Columns[columnName];
+            if (col != null) col.HeaderText = text;
+        }
+
         private async Task LoadDataAsync()
         {
             try
@@ -220,7 +190,7 @@ namespace MiniSupermarketWinForms
                 var customers =
                     await client.GetFromJsonAsync<List<CustomerDto>>("customers");
 
-                dgvCustomers.DataSource = customers;
+                BindGrid(customers);
             }
             catch (Exception ex)
             {
@@ -381,6 +351,16 @@ namespace MiniSupermarketWinForms
             }
         }
 
+        // Nhấn Enter trong ô tìm kiếm cũng tìm luôn
+        private void txtKeyword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnSearch.PerformClick();
+            }
+        }
+
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             string keyword = txtKeyword.Text.Trim();
@@ -398,7 +378,7 @@ namespace MiniSupermarketWinForms
                 using var client = GetAuthenticatedClient();
                 var result = await client.GetFromJsonAsync<List<CustomerDto>>(url);
 
-                dgvCustomers.DataSource = result;
+                BindGrid(result);
             }
             catch (Exception ex)
             {

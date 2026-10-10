@@ -14,6 +14,8 @@ namespace MiniSupermarketWinForms
         public static string JwtToken { get; set; } = string.Empty;
         // Lưu trữ chức vụ/vai trò hiện tại của người dùng (VD: Admin, Cashier)
         public static string CurrentRole { get; set; } = string.Empty;
+        // Lưu tên đăng nhập hiện tại để hiển thị trên thanh tiêu đề
+        public static string CurrentUsername { get; set; } = string.Empty;
     }
 
     // Lớp tĩnh cung cấp các hàm gọi API dùng chung
