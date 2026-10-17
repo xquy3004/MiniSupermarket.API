@@ -213,6 +213,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             CustomerId = 1,
+                            Address = "12 Lê Lợi, Quận 1, TP.HCM",
                             CustomerName = "Nguyễn Văn A",
                             MembershipRank = "Vàng",
                             PhoneNumber = "0901122334",
@@ -221,6 +222,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             CustomerId = 2,
+                            Address = "45 Nguyễn Trãi, Quận 5, TP.HCM",
                             CustomerName = "Trần Thị B",
                             MembershipRank = "Bạc",
                             PhoneNumber = "0918877665",
@@ -229,10 +231,119 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             CustomerId = 3,
+                            Address = "78 Cách Mạng Tháng 8, Quận 3, TP.HCM",
                             CustomerName = "Lê Văn C",
                             MembershipRank = "Chuẩn",
                             PhoneNumber = "0983344556",
                             RewardPoints = 10
+                        },
+                        new
+                        {
+                            CustomerId = 4,
+                            Address = "23 Trần Hưng Đạo, Quận 1, TP.HCM",
+                            CustomerName = "Phạm Thanh D",
+                            MembershipRank = "Kim cương",
+                            PhoneNumber = "0234567884",
+                            RewardPoints = 345
+                        },
+                        new
+                        {
+                            CustomerId = 5,
+                            Address = "56 Võ Văn Tần, Quận 3, TP.HCM",
+                            CustomerName = "Hoàng Minh Tuấn",
+                            MembershipRank = "Vàng",
+                            PhoneNumber = "0905123456",
+                            RewardPoints = 220
+                        },
+                        new
+                        {
+                            CustomerId = 6,
+                            Address = "89 Hai Bà Trưng, Quận 1, TP.HCM",
+                            CustomerName = "Đỗ Thị Lan Anh",
+                            MembershipRank = "Bạc",
+                            PhoneNumber = "0912345678",
+                            RewardPoints = 85
+                        },
+                        new
+                        {
+                            CustomerId = 7,
+                            Address = "15 Phan Xích Long, Phú Nhuận, TP.HCM",
+                            CustomerName = "Vũ Quốc Bảo",
+                            MembershipRank = "Chuẩn",
+                            PhoneNumber = "0938765432",
+                            RewardPoints = 25
+                        },
+                        new
+                        {
+                            CustomerId = 8,
+                            Address = "102 Lý Thường Kiệt, Quận 10, TP.HCM",
+                            CustomerName = "Ngô Thị Hồng",
+                            MembershipRank = "Kim cương",
+                            PhoneNumber = "0977112233",
+                            RewardPoints = 410
+                        },
+                        new
+                        {
+                            CustomerId = 9,
+                            Address = "34 Nguyễn Văn Cừ, Quận 5, TP.HCM",
+                            CustomerName = "Bùi Đức Thắng",
+                            MembershipRank = "Vàng",
+                            PhoneNumber = "0966778899",
+                            RewardPoints = 175
+                        },
+                        new
+                        {
+                            CustomerId = 10,
+                            Address = "67 Điện Biên Phủ, Bình Thạnh, TP.HCM",
+                            CustomerName = "Đặng Thị Mai",
+                            MembershipRank = "Chuẩn",
+                            PhoneNumber = "0988001122",
+                            RewardPoints = 40
+                        },
+                        new
+                        {
+                            CustomerId = 11,
+                            Address = "21 Lạc Long Quân, Quận 11, TP.HCM",
+                            CustomerName = "Dương Văn Khoa",
+                            MembershipRank = "Bạc",
+                            PhoneNumber = "0945667788",
+                            RewardPoints = 95
+                        },
+                        new
+                        {
+                            CustomerId = 12,
+                            Address = "90 Quang Trung, Gò Vấp, TP.HCM",
+                            CustomerName = "Lý Thị Ngọc",
+                            MembershipRank = "Vàng",
+                            PhoneNumber = "0933221100",
+                            RewardPoints = 260
+                        },
+                        new
+                        {
+                            CustomerId = 13,
+                            Address = "5 Nguyễn Thị Minh Khai, Quận 3, TP.HCM",
+                            CustomerName = "Trương Văn Hải",
+                            MembershipRank = "Chuẩn",
+                            PhoneNumber = "0902334455",
+                            RewardPoints = 0
+                        },
+                        new
+                        {
+                            CustomerId = 14,
+                            Address = "143 Tô Hiến Thành, Quận 10, TP.HCM",
+                            CustomerName = "Phan Thị Thu Hà",
+                            MembershipRank = "Kim cương",
+                            PhoneNumber = "0919889977",
+                            RewardPoints = 380
+                        },
+                        new
+                        {
+                            CustomerId = 15,
+                            Address = "28 Âu Cơ, Tân Bình, TP.HCM",
+                            CustomerName = "Huỳnh Gia Bảo",
+                            MembershipRank = "Bạc",
+                            PhoneNumber = "0987556644",
+                            RewardPoints = 60
                         });
                 });
 

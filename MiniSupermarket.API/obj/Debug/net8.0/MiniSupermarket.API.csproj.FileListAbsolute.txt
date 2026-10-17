@@ -21,7 +21,6 @@ D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\scopedcss\bundle\Min
 D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\staticwebassets.build.json
 D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\staticwebassets.development.json
 D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\MiniSupe.4C4B8D95.Up2Date
 D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\MiniSupermarket.API.dll
 D:\MiniSupermarket.API\MiniSupermarket.API\obj\Debug\net8.0\refint\MiniSupermarket.API.dll

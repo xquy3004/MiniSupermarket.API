@@ -33,7 +33,6 @@ namespace MiniSupermarketWinForms
         private Label lblTotal;
         private TextBox txtCashReceived;
         private Label lblChange;
-        private Button btnRemoveLine;
         private Button btnClearCart;
         private Button btnCheckout;
 
@@ -141,18 +140,16 @@ namespace MiniSupermarketWinForms
                 Font = new Font("Segoe UI", 13F, FontStyle.Bold)
             };
 
-            btnRemoveLine = CreateButton("Xóa dòng", Color.FromArgb(230, 126, 34), 12, 140, 140, 36);
-            btnClearCart = CreateButton("HỦY GIỎ HÀNG", Color.FromArgb(192, 57, 43), 160, 140, 190, 36);
+            btnClearCart = CreateButton("HỦY GIỎ HÀNG", Color.FromArgb(192, 57, 43), 12, 140, 450, 36);
             btnCheckout = CreateButton("THANH TOÁN (F9)", Color.FromArgb(30, 132, 73), 12, 188, 450, 48);
             btnCheckout.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnRemoveLine.Click += btnRemoveLine_Click;
             btnClearCart.Click += btnClearCart_Click;
             btnCheckout.Click += btnCheckout_Click;
 
             panelBottom.Controls.AddRange(new Control[]
             {
                 lblTotalCaption, lblTotal, lblCashCaption, txtCashReceived,
-                lblChangeCaption, lblChange, btnRemoveLine, btnClearCart, btnCheckout
+                lblChangeCaption, lblChange, btnClearCart, btnCheckout
             });
 
             // --- Bảng giỏ hàng ---
@@ -540,7 +537,7 @@ namespace MiniSupermarketWinForms
             if (item.Quantity < 1)
             {
                 item.Quantity = 1;
-                SetStatus("Số lượng tối thiểu là 1 (muốn bỏ hàng thì bấm \"Xóa dòng\").", true);
+                SetStatus("Số lượng tối thiểu là 1 (muốn bỏ hết hàng thì bấm \"HỦY GIỎ HÀNG\").", true);
             }
             else if (item.Quantity > item.MaxStock)
             {
@@ -550,17 +547,6 @@ namespace MiniSupermarketWinForms
 
             dgvCart.Refresh();
             UpdateTotal();
-        }
-
-        private void btnRemoveLine_Click(object sender, EventArgs e)
-        {
-            if (dgvCart.CurrentRow == null) return;
-            var item = dgvCart.CurrentRow.DataBoundItem as CartItem;
-            if (item == null) return;
-
-            _cart.Remove(item);
-            UpdateTotal();
-            txtBarcode.Focus();
         }
 
         private void btnClearCart_Click(object sender, EventArgs e)
