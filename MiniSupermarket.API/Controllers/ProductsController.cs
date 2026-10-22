@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MiniSupermarket.API.Data;
@@ -31,6 +31,107 @@ namespace MiniSupermarket.API.Controllers
                 CategoryId = p.CategoryId,
                 CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty
             });
+        }
+
+        // =========================================================================
+        // BUỔI 6: PHÂN TRANG LINQ & TÌM KIẾM SẢN PHẨM (EAGER LOADING)
+        // =========================================================================
+        // GET: api/products/paged?keyword=sua&categoryId=1&pageNumber=1&pageSize=5
+        [HttpGet("paged")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPagedProducts(
+            [FromQuery] string? keyword,
+            [FromQuery] int? categoryId,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            // 1. Kiểm tra tham số trang đầu vào hợp lệ
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1 || pageSize > 50) pageSize = 10;
+
+            // 2. Khởi tạo truy vấn LINQ IQueryable kết hợp Eager Loading (.Include)
+            var query = _context.Products
+                .Include(p => p.Category)
+                .AsNoTracking()
+                .AsQueryable();
+
+            // 3. Lọc theo từ khóa tìm kiếm (nếu người dùng có nhập)
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string search = keyword.Trim().ToLower();
+                query = query.Where(p => p.ProductName.ToLower().Contains(search)
+                                      || p.Barcode.Contains(search));
+            }
+
+            // BÀI TẬP 6.2: Lọc theo nhóm hàng (categoryId)
+            if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                query = query.Where(p => p.CategoryId == categoryId.Value);
+            }
+
+            // 4. Đếm tổng số lượng bản ghi thỏa mãn điều kiện
+            int totalItems = await query.CountAsync();
+
+            // 5. Tính toán tổng số trang
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            // 6. Áp dụng toán tử Skip và Take để phân trang trực tiếp dưới SQL Server
+            var items = await query
+                .OrderBy(p => p.ProductId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new ProductItemDto
+                {
+                    ProductId = p.ProductId,
+                    Barcode = p.Barcode,
+                    ProductName = p.ProductName,
+                    Price = p.Price,
+                    StockQuantity = p.StockQuantity,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty,
+                    IsLowStock = p.StockQuantity <= 20
+                })
+                .ToListAsync();
+
+            // 7. Đóng gói kết quả trả về cho Client
+            var response = new PagedResult<ProductItemDto>
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                Items = items
+            };
+
+            return Ok(response);
+        }
+
+        // =========================================================================
+        // PHỤ LỤC - BÀI TẬP 1: LẤY DANH SÁCH KÈM TÊN DANH MỤC (EAGER LOADING)
+        // =========================================================================
+        // GET: api/products/with-category
+        [HttpGet("with-category")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetProductsWithCategory()
+        {
+            var list = await _context.Products
+                .Include(p => p.Category)
+                .AsNoTracking()
+                .Select(p => new ProductItemDto
+                {
+                    ProductId = p.ProductId,
+                    Barcode = p.Barcode,
+                    ProductName = p.ProductName,
+                    Price = p.Price,
+                    StockQuantity = p.StockQuantity,
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category != null ? p.Category.CategoryName : string.Empty,
+                    IsLowStock = p.StockQuantity <= 20
+                })
+                .OrderBy(p => p.ProductId)
+                .ToListAsync();
+
+            return Ok(list);
         }
 
         // 1. GET /api/products?barcode=...&categoryId=...  (cả 2 tham số đều không bắt buộc)

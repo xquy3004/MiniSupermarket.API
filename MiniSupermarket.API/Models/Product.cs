@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MiniSupermarket.API.Models
@@ -27,5 +27,9 @@ namespace MiniSupermarket.API.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category? Category { get; set; }
+
+        // BÀI TẬP 2 PHỤ LỤC: Thuộc tính tính toán cảnh báo tồn kho sắp hết (<= 20)
+        [NotMapped]
+        public bool IsLowStock => StockQuantity <= 20;
     }
 }

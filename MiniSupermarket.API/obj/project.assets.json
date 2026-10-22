@@ -4156,11 +4156,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MiniSupermarket.API\\MiniSupermarket.API\\MiniSupermarket.API.csproj",
+      "projectUniqueName": "D:\\LTUD\\MiniSupermarket.API\\MiniSupermarket.API\\MiniSupermarket.API.csproj",
       "projectName": "MiniSupermarket.API",
-      "projectPath": "D:\\MiniSupermarket.API\\MiniSupermarket.API\\MiniSupermarket.API.csproj",
+      "projectPath": "D:\\LTUD\\MiniSupermarket.API\\MiniSupermarket.API\\MiniSupermarket.API.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\MiniSupermarket.API\\MiniSupermarket.API\\obj\\",
+      "outputPath": "D:\\LTUD\\MiniSupermarket.API\\MiniSupermarket.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

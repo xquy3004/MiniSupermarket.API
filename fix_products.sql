@@ -1,0 +1,33 @@
+﻿
+USE MiniSupermarketDb;
+
+UPDATE Products SET ProductName = N'Sữa bột Meiji số 0 (0-1 tuổi) hộp 800g Nhật' WHERE ProductId = 21;
+UPDATE Products SET ProductName = N'Sữa bột Frisolac Gold số 2 (6-12 tháng) 850g' WHERE ProductId = 22;
+UPDATE Products SET ProductName = N'Sữa tươi TH True Milk TOP KID dâu 180ml lốc 4' WHERE ProductId = 23;
+UPDATE Products SET ProductName = N'Sữa chua uống tiệt trùng Yomost cam lốc 4 hộp' WHERE ProductId = 24;
+UPDATE Products SET ProductName = N'Sữa hạt ngũ cốc dinh dưỡng Pororo Hàn Quốc' WHERE ProductId = 25;
+UPDATE Products SET ProductName = N'Tã dán Merries nội địa Nhật size M (6-11kg) 64m' WHERE ProductId = 26;
+UPDATE Products SET ProductName = N'Tã quần Moony Natural hữu cơ size L 36 miếng' WHERE ProductId = 27;
+UPDATE Products SET ProductName = N'Khăn giấy khô đa năng siêu mềm Mama 200 tờ' WHERE ProductId = 28;
+UPDATE Products SET ProductName = N'Bánh ăn dặm Gerber Graduate vị chuối dâu 42g' WHERE ProductId = 29;
+UPDATE Products SET ProductName = N'Cháo tươi Cây Thị lươn đậu xanh dinh dưỡng 260g' WHERE ProductId = 30;
+UPDATE Products SET ProductName = N'Váng sữa Monte vị vani nhập khẩu Đức lốc 4 hộp' WHERE ProductId = 31;
+UPDATE Products SET ProductName = N'Núm ty thay thế Pigeon cổ rộng size M vỉ 2 cái' WHERE ProductId = 32;
+UPDATE Products SET ProductName = N'Ti giả chỉnh nha Philips Avent ban đêm vỉ 2 cái' WHERE ProductId = 33;
+UPDATE Products SET ProductName = N'Nước rửa bình sữa và rau củ D-nee chai 620ml' WHERE ProductId = 34;
+UPDATE Products SET ProductName = N'Bộ chén muỗng tập ăn dặm báo nóng Richell Nhật' WHERE ProductId = 35;
+UPDATE Products SET ProductName = N'Ghế ăn dặm gấp gọn nâng hạ độ cao Mastela' WHERE ProductId = 36;
+UPDATE Products SET ProductName = N'Yếm ăn dặm silicon cao cấp có máng hứng' WHERE ProductId = 37;
+UPDATE Products SET ProductName = N'Phấn rôm tinh chất hoa cúc Chicco 150g' WHERE ProductId = 38;
+UPDATE Products SET ProductName = N'Sữa dưỡng ẩm toàn thân Cetaphil Baby Lotion' WHERE ProductId = 39;
+UPDATE Products SET ProductName = N'Bàn chải đánh răng xỏ ngón silicon Richell' WHERE ProductId = 40;
+UPDATE Products SET ProductName = N'Kem đánh răng hữu cơ nuốt được Azetabio 50ml' WHERE ProductId = 41;
+UPDATE Products SET ProductName = N'Gạc rơ lưỡi tưa lưỡi thảo dược Dr.Papie 30 gói' WHERE ProductId = 42;
+UPDATE Products SET ProductName = N'Bộ bao tay bao chân sơ sinh sợi tre Miomio' WHERE ProductId = 43;
+UPDATE Products SET ProductName = N'Mũ chụp sơ sinh bo viền cotton Nous Nu Petit' WHERE ProductId = 44;
+UPDATE Products SET ProductName = N'Gối chặn bông chống giật mình Uala Rogo cho bé' WHERE ProductId = 45;
+UPDATE Products SET ProductName = N'Khăn quấn ủ kén sơ sinh SwaddleMe cotton co giãn' WHERE ProductId = 46;
+UPDATE Products SET ProductName = N'Xe đẩy du lịch gấp gọn siêu nhẹ Seebaby QQ3' WHERE ProductId = 47;
+UPDATE Products SET ProductName = N'Địu em bé trợ lực 4 tư thế Ergobaby Omni 360' WHERE ProductId = 48;
+UPDATE Products SET ProductName = N'Đai nịt bụng định hình thoáng khí sau sinh Farlin' WHERE ProductId = 49;
+UPDATE Products SET ProductName = N'Máy hút sữa điện đôi Spectra 9 Plus có pin' WHERE ProductId = 50;

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MiniSupermarket.API.Data;
@@ -16,6 +16,53 @@ namespace MiniSupermarket.API.Controllers
         public CustomersController(SupermarketDbContext context)
         {
             _context = context;
+        }
+
+        // =========================================================================
+        // BUỔI 6 - BÀI TẬP 6.1: PHÂN TRANG DANH SÁCH KHÁCH HÀNG THÂN THIẾT
+        // =========================================================================
+        // GET: api/customers/paged?keyword=an&pageNumber=1&pageSize=5
+        [HttpGet("paged")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetPagedCustomers(
+            [FromQuery] string? keyword,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 5)
+        {
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1 || pageSize > 50) pageSize = 5;
+
+            var query = _context.Customers
+                .AsNoTracking()
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string search = keyword.Trim().ToLower();
+                query = query.Where(c => c.CustomerName.ToLower().Contains(search)
+                                      || c.PhoneNumber.Contains(search));
+            }
+
+            int totalItems = await query.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            // Sắp xếp theo thứ tự giảm dần của điểm thưởng (RewardPoints)
+            var items = await query
+                .OrderByDescending(c => c.RewardPoints)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var response = new PagedResult<Customer>
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                Items = items
+            };
+
+            return Ok(response);
         }
 
         // 1. GET: Lấy toàn bộ danh sách khách hàng

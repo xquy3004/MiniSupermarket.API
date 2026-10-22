@@ -247,21 +247,32 @@ namespace MiniSupermarket.API.Controllers
                     int? customerId = null;
                     int pointsToDeduct = 0;
 
+                    bool orderFound = false;
                     using (SqlCommand cmdGet = new SqlCommand(getOrderSql, connection, transaction))
                     {
                         cmdGet.Parameters.AddWithValue("@OrderId", orderId);
                         using (SqlDataReader reader = cmdGet.ExecuteReader())
                         {
-                            if (!reader.Read())
+                            if (reader.Read())
                             {
-                                throw new InvalidOperationException($"Không tìm thấy hóa đơn ID = {orderId} để hủy!");
+                                orderFound = true;
+                                if (reader["CustomerId"] != DBNull.Value)
+                                {
+                                    customerId = Convert.ToInt32(reader["CustomerId"]);
+                                }
+                                pointsToDeduct = Convert.ToInt32(reader["PointsEarned"]);
                             }
-                            if (reader["CustomerId"] != DBNull.Value)
-                            {
-                                customerId = Convert.ToInt32(reader["CustomerId"]);
-                            }
-                            pointsToDeduct = Convert.ToInt32(reader["PointsEarned"]);
                         }
+                    }
+
+                    if (!orderFound)
+                    {
+                        transaction.Rollback();
+                        return NotFound(new
+                        {
+                            success = false,
+                            message = $"Không tìm thấy hóa đơn ID = {orderId} để hủy!"
+                        });
                     }
 
                     // 2. Lấy danh sách sản phẩm đã mua để hoàn trả kho

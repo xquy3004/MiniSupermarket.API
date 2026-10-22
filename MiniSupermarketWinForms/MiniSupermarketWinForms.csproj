@@ -82,7 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiClientService.cs" />
     <Compile Include="FormCategoryManagement.cs">
       <SubType>Form</SubType>
     </Compile>

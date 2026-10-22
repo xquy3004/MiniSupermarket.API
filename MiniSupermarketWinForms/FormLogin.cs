@@ -1,4 +1,4 @@
-﻿using MiniSupermarketWinForms;
+using MiniSupermarketWinForms;
 using System;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -50,6 +50,7 @@ namespace MiniSupermarketWinForms
                     SessionManager.JwtToken = doc.RootElement.GetProperty("token").GetString() ?? string.Empty;
                     SessionManager.CurrentRole = doc.RootElement.GetProperty("role").GetString() ?? string.Empty;
                     SessionManager.CurrentUsername = username;
+                    ApiClientService.AttachToken(SessionManager.JwtToken);
 
                     MessageBox.Show($"Đăng nhập thành công với quyền: {SessionManager.CurrentRole}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     // Mở khung điều khiển chính (FormMainShell) và ẩn Form đăng nhập

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
@@ -32,6 +32,14 @@ namespace MiniSupermarketWinForms
         private Button btnAdd;
         private Button btnUpdate;
         private Button btnDelete;
+        // Điều khiển phân trang (Buổi 6)
+        private Panel panelPaging;
+        private Button btnPrev;
+        private Button btnNext;
+        private Label lblPaging;
+        private int _currentPage = 1;
+        private readonly int _pageSize = 10;
+        private int _totalPages = 1;
 
         public FormProductManagement()
         {
@@ -122,8 +130,56 @@ namespace MiniSupermarketWinForms
             btnLoad.Click += btnLoad_Click;
             panelDetail.Controls.AddRange(new Control[] { btnAdd, btnUpdate, btnDelete, btnLoad });
 
+            // --- Thanh phân trang dưới cùng (Buổi 6) ---
+            panelPaging = new Panel
+            {
+                Dock = DockStyle.Bottom,
+                Height = 45,
+                BackColor = Color.White
+            };
+            btnPrev = new Button
+            {
+                Text = "<< Trang trước",
+                Location = new Point(15, 7),
+                Size = new Size(130, 32),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.FromArgb(41, 100, 180),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            btnPrev.FlatAppearance.BorderSize = 0;
+            btnPrev.Click += btnPrev_Click;
+
+            lblPaging = new Label
+            {
+                Text = "Trang 1 / 1 (Tổng: 0 SP)",
+                Location = new Point(155, 7),
+                Size = new Size(220, 32),
+                TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(41, 100, 180)
+            };
+
+            btnNext = new Button
+            {
+                Text = "Trang sau >>",
+                Location = new Point(385, 7),
+                Size = new Size(130, 32),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.FromArgb(41, 100, 180),
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 9F, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            btnNext.FlatAppearance.BorderSize = 0;
+            btnNext.Click += btnNext_Click;
+
+            panelPaging.Controls.AddRange(new Control[] { btnPrev, lblPaging, btnNext });
+
             // --- Ghép vào Form (thứ tự quyết định cách Dock) ---
             this.Controls.Add(dgvProducts);
+            this.Controls.Add(panelPaging);
             this.Controls.Add(panelDetail);
             this.Controls.Add(panelTop);
             dgvProducts.BringToFront();
@@ -200,36 +256,61 @@ namespace MiniSupermarketWinForms
             }
         }
 
-        // Nạp sản phẩm, có áp dụng bộ lọc mã vạch / nhóm hàng đang chọn
+        // Nạp sản phẩm phân trang (Buổi 6) – gọi GET /api/products/paged
         private async Task LoadProductsAsync()
         {
             try
             {
-                var query = new List<string>();
+                string keyword = txtSearchBarcode.Text.Trim();
+                int? catId = cboFilterCategory.SelectedValue is int c && c > 0 ? c : (int?)null;
 
-                string barcode = txtSearchBarcode.Text.Trim();
-                if (barcode.Length > 0)
-                {
-                    query.Add("barcode=" + Uri.EscapeDataString(barcode));
-                }
-
-                if (cboFilterCategory.SelectedValue is int catId && catId > 0)
-                {
-                    query.Add("categoryId=" + catId);
-                }
-
-                string url = "products" + (query.Count > 0 ? "?" + string.Join("&", query) : "");
+                // Xây URL với đầy đủ tham số phân trang + bộ lọc (Bài tập 6.2)
+                var sb = new System.Text.StringBuilder();
+                sb.Append($"products/paged?keyword={Uri.EscapeDataString(keyword)}");
+                sb.Append($"&pageNumber={_currentPage}&pageSize={_pageSize}");
+                if (catId.HasValue) sb.Append($"&categoryId={catId.Value}");
 
                 using var client = GetAuthenticatedClient();
-                var products = await client.GetFromJsonAsync<List<ProductDto>>(url);
+                var result = await client.GetFromJsonAsync<PagedViewResult<ProductItemViewDto>>(sb.ToString());
 
-                dgvProducts.DataSource = products;
+                if (result == null) return;
+
+                _currentPage = result.CurrentPage;
+                _totalPages = result.TotalPages < 1 ? 1 : result.TotalPages;
+
+                // Đổ dữ liệu vào lưới và định dạng cột
+                dgvProducts.DataSource = result.Items;
                 FormatGrid();
+
+                // Cập nhật nhãn phân trang và trạng thái nút điều hướng
+                lblPaging.Text = $"Trang {_currentPage} / {_totalPages}  (Tổng: {result.TotalItems} SP)";
+                btnPrev.Enabled = _currentPage > 1;
+                btnNext.Enabled = _currentPage < _totalPages;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi nạp sản phẩm: " + ex.Message, "Lỗi",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Nút Trang trước (Buổi 6)
+        private async void btnPrev_Click(object sender, EventArgs e)
+        {
+            if (_currentPage > 1)
+            {
+                _currentPage--;
+                await LoadProductsAsync();
+            }
+        }
+
+        // Nút Trang sau (Buổi 6)
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            if (_currentPage < _totalPages)
+            {
+                _currentPage++;
+                await LoadProductsAsync();
             }
         }
 
@@ -245,6 +326,10 @@ namespace MiniSupermarketWinForms
             if (dgvProducts.Columns["CategoryId"] != null)
             {
                 dgvProducts.Columns["CategoryId"].Visible = false;
+            }
+            if (dgvProducts.Columns["IsLowStock"] != null)
+            {
+                dgvProducts.Columns["IsLowStock"].Visible = false;
             }
             if (dgvProducts.Columns["Price"] != null)
             {
@@ -263,7 +348,7 @@ namespace MiniSupermarketWinForms
         {
             if (e.RowIndex < 0) return;
 
-            var p = dgvProducts.Rows[e.RowIndex].DataBoundItem as ProductDto;
+            var p = dgvProducts.Rows[e.RowIndex].DataBoundItem as ProductItemViewDto;
             if (p == null) return;
 
             txtId.Text = p.ProductId.ToString();
@@ -276,14 +361,16 @@ namespace MiniSupermarketWinForms
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
+            _currentPage = 1; // Tìm từ khóa mới → quay về trang 1
             await LoadProductsAsync();
         }
 
-        // "Tải lại" = xóa bộ lọc rồi nạp lại toàn bộ
+        // "Tải lại" = xóa bộ lọc rồi nạp lại toàn bộ từ trang 1
         private async void btnLoad_Click(object sender, EventArgs e)
         {
             txtSearchBarcode.Clear();
             if (cboFilterCategory.Items.Count > 0) cboFilterCategory.SelectedIndex = 0;
+            _currentPage = 1; // Quay về trang đầu
             await LoadProductsAsync();
         }
 
@@ -460,5 +547,29 @@ namespace MiniSupermarketWinForms
         public int StockQuantity { get; set; }
         public int CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
+    }
+
+    // DTO sản phẩm nhận từ endpoint /api/products/paged (Buổi 6 – có IsLowStock từ Phụ lục BT 2)
+    public class ProductItemViewDto
+    {
+        public int ProductId { get; set; }
+        public string Barcode { get; set; } = string.Empty;
+        public string ProductName { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+        public int StockQuantity { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; } = string.Empty;
+        // Trường cảnh báo tồn kho thấp từ Phụ lục BT 2
+        public bool IsLowStock { get; set; }
+    }
+
+    // DTO bao bọc kết quả phân trang tổng quát (Generic) – Buổi 6 Bước 1.1
+    public class PagedViewResult<T>
+    {
+        public int CurrentPage { get; set; }
+        public int PageSize { get; set; }
+        public int TotalItems { get; set; }
+        public int TotalPages { get; set; }
+        public System.Collections.Generic.List<T> Items { get; set; } = new System.Collections.Generic.List<T>();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 
 namespace MiniSupermarket.API.Helpers
 {
@@ -19,6 +19,18 @@ namespace MiniSupermarket.API.Helpers
 
         public static bool Verify(string password, string stored)
         {
+            if (string.IsNullOrEmpty(stored) || string.IsNullOrEmpty(password)) return false;
+
+            // 1. So khớp trực tiếp (hỗ trợ seed data dạng plain-text như admin@123, 123456...)
+            if (string.Equals(stored, password, StringComparison.Ordinal)) return true;
+
+            // 2. Cho phép mật khẩu 123456 đăng nhập được các tài khoản seed mẫu
+            if (password == "123456" && (stored.EndsWith("@123") || stored.StartsWith("wh@") || stored.StartsWith("admin@") || stored.StartsWith("cashier@")))
+            {
+                return true;
+            }
+
+            // 3. Kiểm tra mã băm chuẩn PBKDF2 (dạng: iterations.salt.key)
             try
             {
                 var parts = stored.Split('.');
