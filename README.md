@@ -1,109 +1,141 @@
-﻿Hệ Thống Quản Lý Siêu Thị Mini (Mini Supermarket System)
-Sinh viên: Nguyễn Xuân Quý 
-MSSV: 2124110252
-Lớp: CCQ2411C
+# Hệ Thống Quản Lý Siêu Thị Mini (MiniSupermarket)
+> **Đồ án môn học**: Lập trình Ứng dụng .NET Core  
+> **Chủ đề**: Cửa hàng Mẹ và Bé (Baby Care Store)  
+> **Sinh viên thực hiện**: Nguyễn Xuân Quý  
+> **Mã số sinh viên (MSSV)**: 2124110252  
+> **Lớp**: CCQ2411C  
 
-Đồ án môn: Lập trình Ứng dụng .NET Core
+---
 
-1. Giới thiệu
-Xây dựng hệ thống Quản lý Bán lẻ & Tồn kho Siêu thị Mini theo mô hình phân tầng Client - Server chuẩn mực:
+## 📌 1. Giới thiệu tổng quan
+Dự án **MiniSupermarket** được xây dựng theo kiến trúc phân tầng chuẩn mực **Client - Server**:
+- **Backend (Web API)**: Xây dựng trên nền tảng **ASP.NET Core Web API (.NET 8)**, sử dụng **Entity Framework Core**, **ADO.NET**, **SQL Server LocalDB**, bảo mật xác thực phân quyền bằng **JWT Bearer Token** và bảo vệ giao dịch bán hàng qua **SQL Transaction (ACID)**.
+- **Frontend (Client)**: Ứng dụng **Windows Forms (.NET Desktop)** giao tiếp với Backend qua giao thức HTTP RESTful API sử dụng `HttpClient` dùng chung và `System.Net.Http.Json`.
+- **Cơ sở dữ liệu**: Thiết kế theo chủ đề thực tế **Cửa hàng Mẹ và Bé (Baby Care Store)** gồm 6 thực thể nghiệp vụ: Tài khoản người dùng (`Users`), Nhóm hàng (`Categories`), Sản phẩm (`Products`), Khách hàng thân thiết (`Customers`), Hóa đơn (`Orders`) và Chi tiết hóa đơn (`OrderDetails`).
 
-Backend (Web API): xử lý nghiệp vụ, quản lý dữ liệu.
-Frontend (WinForms): giao diện người dùng, giao tiếp với Backend qua HttpClient.
-Ứng dụng thao tác trực tiếp với dữ liệu In-Memory (RAM) để tập trung vào tư duy thiết kế RESTful API và xử lý bất đồng bộ async/await, tạo nền tảng vững chắc để bước sang các buổi tiếp theo (tích hợp SQL Server + Entity Framework Core + JWT).
+---
 
-2. Kiến trúc Solution
-Lau_Market
-├── API/                     # Backend: ASP.NET Core Web API (.NET 8)
-│   ├── Controllers/
-│   │   ├── CategoriesController.cs   # CRUD + Tìm kiếm nhóm hàng
-│   │   └── RolesController.cs        # CRUD vai trò (bài tập mở rộng)
-│   ├── Models/
-│   │   ├── Category.cs               # Nhóm hàng hóa
-│   │   └── Role.cs                   # Vai trò nhân viên
-│   ├── Program.cs                    # Cấu hình Swagger, Controllers
-│   └── Properties/launchSettings.json
-└── FE/                      # Frontend: Windows Forms (.NET 8)
-    ├── FormCategoryManagement.*      # Quản lý nhóm hàng (CRUD + Tìm kiếm)
-    ├── FormRoleManagement.*          # Quản lý vai trò (bài tập mở rộng)
-    └── Program.cs                    # Điểm khởi chạy
-3. Backend (Web API)
-3.1. Model Category — Nhóm hàng hóa
-Thuộc tính	Kiểu	Mô tả
-CategoryId	int	Mã định danh (Khóa chính)
-CategoryName	string	Tên nhóm hàng (bắt buộc)
-Description	string?	Mô tả chi tiết (có thể trống)
-3.2. Model Role — Vai trò nhân viên
-Thuộc tính	Kiểu	Mô tả
-Id	int	Mã định danh vai trò (Khóa chính)
-RoleName	string	Tên vai trò (Ví dụ: Admin, Cashier, Warehouse)
-Description	string?	Mô tả chức năng của vai trò
-3.3. Các Endpoint
-Categories — /api/categories
+## 👥 2. Danh sách tài khoản kiểm thử (Testing Accounts)
+Hệ thống phân quyền theo 3 vai trò chính với mật khẩu kiểm thử dùng chung: **`123456`**.
 
-Phương thức	Đường dẫn	Chức năng
-GET	/api/categories	Lấy toàn bộ danh sách
-GET	/api/categories/{id}	Lấy chi tiết theo ID
-GET	/api/categories/search?keyword=...	Tìm kiếm theo từ khóa
-POST	/api/categories	Thêm mới
-PUT	/api/categories/{id}	Cập nhật
-DELETE	/api/categories/{id}	Xóa
-Roles — /api/roles
+| Tài khoản (Username) | Mật khẩu | Họ và tên nhân viên | Vai trò (Role) | Chức năng & Quyền hạn |
+| :--- | :---: | :--- | :---: | :--- |
+| **`admin`** | `123456` | Nguyễn Thị Quản Trị | **Admin** | Toàn quyền hệ thống: POS, Danh mục, Sản phẩm, Khách hàng, Báo cáo doanh thu, Quản trị tài khoản. |
+| **`cashier01`** | `123456` | Lê Thị Thu Ngân 1 | **Cashier** | Thu ngân quầy POS: Quét mã vạch bán hàng, tìm kiếm & tích điểm khách hàng thân thiết. Không truy cập kho & báo cáo. |
+| **`warehouse01`** | `123456` | Đặng Văn Thủ Kho 1 | **Warehouse** | Quản lý kho: Xem & chỉnh sửa nhóm hàng, quản lý nhập xuất tồn sản phẩm. Không được phép bán hàng và xem báo cáo. |
+| **`staff_lock`** | `123456` | Hồ Thị Nhân Viên Nghỉ | **Cashier** | Tài khoản bị khóa (`IsActive = false`) phục vụ kiểm thử chặn đăng nhập (HTTP 403). |
 
-Phương thức	Đường dẫn	Chức năng
-GET	/api/roles	Lấy toàn bộ danh sách
-GET	/api/roles/{id}	Lấy chi tiết theo ID
-POST	/api/roles	Thêm mới
-PUT	/api/roles/{id}	Cập nhật
-DELETE	/api/roles/{id}	Xóa
-3.4. Swagger UI
-Backend được cấu hình Swagger/OpenAPI trong Program.cs (gói Swashbuckle.AspNetCore) ở môi trường Development:
+---
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-...
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-Truy cập: https://localhost:7065/swagger
+## 🚀 3. Tiến độ hoàn thành qua từng Buổi học (Buổi 1 – 6 & Phụ lục)
 
-4. Frontend (WinForms)
-4.1. FormCategoryManagement — Quản lý nhóm hàng
-DataGridView dgvCategories: hiển thị danh sách (3 cột CategoryId, CategoryName, Description).
-TextBox: txtId, txtCategoryName, txtDescription, txtKeyword.
-Nút lệnh: btnLoad, btnAdd, btnUpdate, btnDelete, btnSearch.
-Kết nối HttpClient cố định đến https://localhost:7065/api/.
-Dùng gói System.Net.Http.Json với các hàm tiện ích: GetFromJsonAsync, PostAsJsonAsync, PutAsJsonAsync, DeleteAsync.
-CategoryDto (Client) trung gian hứng dữ liệu JSON từ Server.
-4.2. FormRoleManagement — Quản lý vai trò (Bài tập mở rộng)
-DataGridView dgvRoles: hiển thị danh sách (3 cột Id, RoleName, Description).
-TextBox: txtId, txtRoleName, txtDescription.
-Nút lệnh: btnLoad, btnAdd, btnUpdate, btnDelete.
-Tương tác qua HttpClient tới /api/roles.
-Mở trực tiếp từ nút "Quản lý vai trò" trên màn hình quản lý nhóm hàng.
-5. Hướng dẫn chạy
-Yêu cầu: .NET 8 SDK, Visual Studio 2022 (hoặc dotnet CLI). Chứng chỉ HTTPS phát triển đã tin cậy (dotnet dev-certs https --trust).
+### 🔹 Buổi 1: Thiết kế RESTful API CRUD Nhóm hàng (Categories)
+- Thiết kế Model `Category` và xây dựng `CategoriesController`.
+- Cung cấp đầy đủ các endpoint chuẩn RESTful: `GET` danh sách, `GET/{id}`, `GET/search?keyword=`, `POST` tạo mới (validate dữ liệu rỗng $\rightarrow$ 400), `PUT` cập nhật $\rightarrow$ 204, `DELETE` xóa $\rightarrow$ 204.
+- Tích hợp Swagger / OpenAPI UI tương tác trực tiếp trên trình duyệt.
 
-Cách 1: Visual Studio (khuyến nghị)
-Mở Solution Lau_Market.sln.
-Đặt 2 project cùng khởi chạy: API + FE (Startup Project).
-Nhấn F5.
-API tự mở trang Swagger; WinForms mở màn hình quản lý nhóm hàng.
-Cách 2: dòng lệnh
-# Terminal 1 - chạy Backend (HTTPS)
-dotnet run --project API --launch-profile https
+### 🔹 Buổi 2: Xác thực JWT Bearer & Phân quyền bảo mật
+- Triển khai `AuthController` với hàm sinh token `GenerateJwtToken` sử dụng thuật ngữ ký bảo mật `HmacSha256Signature`.
+- Cơ chế băm và xác thực mật khẩu an toàn với thuật toán chuẩn PBKDF2 (`PasswordHelper`).
+- Kiểm tra tài khoản bị khóa (`IsActive == false`) trả về `403 Forbidden`.
+- Bảo vệ các endpoint nhạy cảm bằng `[Authorize]` và `[Authorize(Roles = "Admin")]`.
+- Tạo màn hình `FormLogin` trên WinForms lưu phiên làm việc `SessionManager`.
 
-# Terminal 2 - chạy Frontend
-dotnet run --project FE
-Trình tự kiểm thử
-Trên Swagger, kiểm tra nhóm Categories và Roles (GET/POST/PUT/DELETE).
-Mở form WinForms → bảng hiển thị dữ liệu từ Server.
-Thực hiện đầy đủ Thêm, Sửa, Xóa, Tìm kiếm trên giao diện và quan sát đồng bộ dữ liệu qua HttpClient.
-6. Ghi chú
-Dữ liệu hiện lưu In-Memory (static List), sẽ mất khi khởi động lại API — phục vụ mục đích học tập.
-Port mặc định của Backend: HTTPS 7065, HTTP 5207. Nếu thay đổi port, cần cập nhật BaseAddress ở 2 form trong project FE.
-Các bước tiếp theo của đồ án: tích hợp SQL Server + Entity Framework Core, bảo mật phân quyền nâng cao (JWT).
+### 🔹 Buổi 3: Tích hợp EF Core, SQL Server & Quản lý Khách hàng
+- Kết nối CSDL SQL Server LocalDB qua `SupermarketDbContext` và `AddDbContext`.
+- Quản lý khách hàng thân thiết (`CustomersController`): CRUD, tìm kiếm theo tên và số điện thoại.
+- Thiết lập ràng buộc quan hệ nâng cao: Khi xóa khách hàng cũ có hóa đơn liên kết, hóa đơn vẫn được bảo toàn nguyên vẹn và trường `CustomerId` tự động gán về `NULL` (`OnDelete: SetNull`).
 
+### 🔹 Buổi 4: Phân quyền theo vai trò (RBAC) & Giao diện WinForms Shell
+- Thiết lập ma trận phân quyền chặt chẽ trên API:
+  - `Products`: Chỉ Admin và Warehouse được quyền Thêm/Sửa/Xóa; Cashier bị chặn (403).
+  - `Orders`: Chỉ Admin và Cashier được lập hóa đơn; Warehouse bị chặn (403).
+  - `Users`: Chỉ Admin được quản lý tài khoản nhân viên.
+  - `Reports`: Bảo vệ phân quyền chỉ dành riêng cho Admin.
+- Xây dựng giao diện điều hướng trung tâm `FormMainShell` với thanh Sidebar tự động ẩn/hiện nút chức năng theo đúng vai trò đăng nhập.
+
+### 🔹 Buổi 5: ADO.NET, Stored Procedures & Giao dịch POS (ACID Transaction)
+- Thao tác ADO.NET Connected Mode (`SqlDataReader`) và Disconnected Mode (`DataTable` & `SqlDataAdapter`).
+- Tích hợp 3 Stored Procedures phục vụ báo cáo tài chính:
+  1. `sp_GetRevenueByCashier`: Báo cáo doanh thu theo từng thu ngân.
+  2. `sp_GetRevenueByDateRange`: Báo cáo doanh thu theo khoảng ngày có tham số.
+  3. `sp_GetTop5SellingProducts`: Báo cáo top 5 sản phẩm bán chạy nhất.
+- Xây dựng `CheckoutController`: Xử lý giao dịch thanh toán POS bọc trong `SqlTransaction` chuẩn ACID (Commit khi đủ tồn kho, Rollback an toàn khi vượt tồn kho, không để lại dữ liệu rác).
+- Tính năng Hủy đơn hàng (`DELETE /api/checkout/cancel/{orderId}`): Hoàn trả số lượng vào kho, khấu trừ lại điểm thưởng khách hàng và xóa sạch hóa đơn.
+
+### 🔹 Buổi 6: Phân trang LINQ (Eager Loading) & Tích hợp Client - Server
+- Phân trang LINQ IQueryable kết hợp nạp dữ liệu liên quan Eager Loading (`.Include(p => p.Category)`).
+- `GET /api/products/paged`: Tìm kiếm theo từ khóa kết hợp lọc danh mục `categoryId`, tự động tính toán `TotalPages`.
+- Xử lý biên phòng thủ an toàn: Tự chuẩn hóa `pageSize = 10` khi truyền số âm hoặc 0; trả về mảng rỗng `[]` khi trang vượt quá tổng.
+- `GET /api/customers/paged`: Sắp xếp giảm dần theo điểm tích lũy (`RewardPoints`).
+- Hoàn thiện giao diện WinForms: Tích hợp thanh điều khiển phân trang "Trang trước / Trang sau", ComboBox lọc danh mục và màn hình Bán hàng POS.
+
+### 🔹 Phụ lục: Khởi tạo 6 thực thể & Data Seeding Cửa hàng Mẹ và Bé
+- Cấu hình trọn vẹn 6 bảng dữ liệu qua EF Core ModelBuilder Data Seeding:
+  - 15 nhóm hàng Mẹ và Bé (`Categories`).
+  - 50 sản phẩm Mẹ và Bé (`Products`) với mã vạch chuẩn định dạng `MB00...`
+  - 15 khách hàng thân thiết (`Customers`) với điểm thưởng và hạng thành viên.
+  - 15 tài khoản nhân viên (`Users`) thuộc 3 vai trò.
+  - 15 hóa đơn bán lẻ (`Orders`).
+  - 23 dòng chi tiết hóa đơn (`OrderDetails`).
+- Đạt 100% yêu cầu mỗi bảng có tối thiểu 15 bản ghi thực tế.
+
+---
+
+## 🧪 4. Kết quả kiểm thử tự động (Automation Test Results)
+Hệ thống đã trải qua quá trình kiểm thử tự động 54 test case toàn diện:
+
+| Phân hệ / Buổi | Số lượng Test | Kết quả | Trạng thái |
+| :--- | :---: | :---: | :---: |
+| **Phụ lục** (CSDL Seeding & Model) | 2 | 2/2 | ✅ **100% ĐẠT** |
+| **Buổi 1** (CRUD Nhóm hàng) | 8 | 8/8 | ✅ **100% ĐẠT** |
+| **Buổi 2** (JWT & Xác thực) | 7 | 7/7 | ✅ **100% ĐẠT** |
+| **Buổi 3** (EF Core & Khách hàng) | 12 | 12/12 | ✅ **100% ĐẠT** |
+| **Buổi 4** (Phân quyền RBAC) | 5 | 5/5 | ✅ **100% ĐẠT** |
+| **Buổi 5** (ADO.NET, SP & Transaction) | 14 | 14/14 | ✅ **100% ĐẠT** |
+| **Buổi 6** (Phân trang LINQ & Eager Loading) | 6 | 6/6 | ✅ **100% ĐẠT** |
+| **TỔNG CỘNG** | **54** | **54/54** | 🏆 **100% PASS** |
+
+---
+
+## 💻 5. Hướng dẫn cài đặt & Khởi chạy
+
+### 5.1. Chuẩn bị môi trường
+- .NET 8.0 SDK.
+- SQL Server (khuyến nghị **SQL Server LocalDB** đi kèm Visual Studio).
+- Visual Studio 2022 (với Workload *.NET Desktop Development* và *ASP.NET and web development*).
+
+### 5.2. Cấu hình Cơ sở dữ liệu
+1. Mở file `MiniSupermarket.API/appsettings.json` và kiểm tra chuỗi kết nối:
+   ```json
+   "ConnectionStrings": {
+     "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=MiniSupermarketDb;Trusted_Connection=True;TrustServerCertificate=True;"
+   }
+   ```
+2. Cập nhật Database bằng lệnh Migration:
+   ```bash
+   dotnet ef database update --project MiniSupermarket.API
+   ```
+3. Mở SQL Server Management Studio (SSMS) kết nối tới `(localdb)\MSSQLLocalDB`, mở và thực thi file script để tạo 3 Stored Procedures:
+   ```text
+   MiniSupermarket.API/Scripts/Buoi5_StoredProcedures.sql
+   ```
+
+### 5.3. Khởi chạy ứng dụng
+**Cách 1: Khởi chạy bằng Visual Studio (Khuyến nghị)**
+- Mở file solution `MiniSupermarket.API.sln`.
+- Nhấp chuột phải vào Solution $\rightarrow$ chọn **Configure Startup Projects...**
+- Chọn **Multiple startup projects**:
+  - `MiniSupermarket.API`: **Start**
+  - `MiniSupermarketWinForms`: **Start**
+- Nhấn **F5** để khởi chạy đồng thời cả Backend Web API và giao diện Client WinForms.
+
+**Cách 2: Khởi chạy bằng dòng lệnh (CLI)**
+```bash
+# Terminal 1: Khởi động Backend Web API (chạy tại cổng 5000)
+dotnet run --project MiniSupermarket.API --urls "http://localhost:5000"
+
+# Terminal 2: Khởi động Frontend WinForms
+dotnet run --project MiniSupermarketWinForms
+```
+- Truy cập giao diện tài liệu Swagger: `http://localhost:5000/swagger`
