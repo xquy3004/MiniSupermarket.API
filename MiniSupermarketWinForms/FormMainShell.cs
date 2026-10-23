@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,6 +20,7 @@ namespace MiniSupermarketWinForms
         private Button btnLogout;
 
         private Panel panelTopHeader;
+        private Label lblBreadcrumb;
         private Label lblTitle;
         private Label lblUserInfo;
 
@@ -43,7 +44,7 @@ namespace MiniSupermarketWinForms
         // ===== Dựng giao diện bằng code =====
         private void InitializeComponent()
         {
-            this.Text = "Hệ thống Quản lý Bán lẻ & Tồn kho Siêu thị Mini";
+            this.Text = "Hệ thống Quản lý Siêu thị Mini Mẹ & Bé - Baby Care Store";
             this.Size = new Size(1280, 720);
             this.StartPosition = FormStartPosition.CenterScreen;
 
@@ -58,28 +59,38 @@ namespace MiniSupermarketWinForms
             panelTopHeader = new Panel
             {
                 Dock = DockStyle.Top,
-                Height = 60,
+                Height = 62,
                 BackColor = Color.White
-            };
-            lblTitle = new Label
-            {
-                Dock = DockStyle.Fill,
-                Text = "BÀN LÀM VIỆC HỆ THỐNG",
-                Font = new Font("Segoe UI", 14F, FontStyle.Bold),
-                TextAlign = ContentAlignment.MiddleLeft,
-                Padding = new Padding(20, 0, 0, 0)
             };
             lblUserInfo = new Label
             {
                 Dock = DockStyle.Right,
-                Width = 480,
+                Width = 460,
                 Text = "Xin chào: ...",
                 Font = new Font("Segoe UI", 10F),
                 TextAlign = ContentAlignment.MiddleRight,
                 Padding = new Padding(0, 0, 20, 0)
             };
-            panelTopHeader.Controls.Add(lblTitle);
+            lblBreadcrumb = new Label
+            {
+                Text = "Trang chủ",
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = Color.FromArgb(100, 116, 139),
+                Location = new Point(20, 8),
+                AutoSize = true
+            };
+            lblTitle = new Label
+            {
+                Text = "BÀN LÀM VIỆC HỆ THỐNG",
+                Font = new Font("Segoe UI", 13.5F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(30, 41, 59),
+                Location = new Point(18, 28),
+                AutoSize = true,
+                UseMnemonic = false
+            };
             panelTopHeader.Controls.Add(lblUserInfo);
+            panelTopHeader.Controls.Add(lblBreadcrumb);
+            panelTopHeader.Controls.Add(lblTitle);
 
             // --- Thanh điều hướng trái ---
             panelSidebar = new Panel
@@ -89,15 +100,37 @@ namespace MiniSupermarketWinForms
                 BackColor = _menuColor
             };
 
-            lblLogo = new Label
+            var panelBrand = new Panel
             {
                 Dock = DockStyle.Top,
-                Height = 70,
-                Text = "🛒 MiniMart POS",
-                ForeColor = Color.White,
-                Font = new Font("Segoe UI", 14F, FontStyle.Bold),
-                TextAlign = ContentAlignment.MiddleCenter
+                Height = 76,
+                BackColor = _menuColor
             };
+
+            lblLogo = new Label
+            {
+                Location = new Point(0, 12),
+                Size = new Size(230, 28),
+                Text = "BABY CARE STORE",
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI", 13F, FontStyle.Bold),
+                TextAlign = ContentAlignment.MiddleCenter,
+                UseMnemonic = false
+            };
+
+            var lblSubLogo = new Label
+            {
+                Location = new Point(0, 42),
+                Size = new Size(230, 20),
+                Text = "Siêu thị Mini Mẹ & Bé",
+                ForeColor = Color.FromArgb(148, 163, 184),
+                Font = new Font("Segoe UI", 9F, FontStyle.Regular),
+                TextAlign = ContentAlignment.MiddleCenter,
+                UseMnemonic = false
+            };
+
+            panelBrand.Controls.Add(lblLogo);
+            panelBrand.Controls.Add(lblSubLogo);
 
             flowMenu = new FlowLayoutPanel
             {
@@ -107,12 +140,12 @@ namespace MiniSupermarketWinForms
                 BackColor = _menuColor
             };
 
-            btnPOS = CreateMenuButton("🛒  Bán hàng (POS)", btnPOS_Click);
-            btnCategory = CreateMenuButton("📁  Quản lý Danh mục", btnCategory_Click);
-            btnProduct = CreateMenuButton("📦  Quản lý Sản phẩm", btnProduct_Click);
-            btnCustomer = CreateMenuButton("👥  Quản lý Khách hàng", btnCustomer_Click);
-            btnReports = CreateMenuButton("📊  Báo cáo Doanh thu", btnReports_Click);
-            btnUserManage = CreateMenuButton("🛡  Quản trị Tài khoản", btnUserManage_Click);
+            btnPOS = CreateMenuButton("Bán hàng (POS)", btnPOS_Click);
+            btnCategory = CreateMenuButton("Quản lý Danh mục", btnCategory_Click);
+            btnProduct = CreateMenuButton("Quản lý Sản phẩm", btnProduct_Click);
+            btnCustomer = CreateMenuButton("Quản lý Khách hàng", btnCustomer_Click);
+            btnReports = CreateMenuButton("Báo cáo Doanh thu", btnReports_Click);
+            btnUserManage = CreateMenuButton("Quản trị Tài khoản", btnUserManage_Click);
             flowMenu.Controls.AddRange(new Control[]
             {
                 btnPOS, btnCategory, btnProduct, btnCustomer, btnReports, btnUserManage
@@ -124,13 +157,13 @@ namespace MiniSupermarketWinForms
                 Height = 60,
                 BackColor = _menuColor
             };
-            btnLogout = CreateMenuButton("🚪  Đăng xuất", btnLogout_Click);
+            btnLogout = CreateMenuButton("Đăng xuất", btnLogout_Click);
             btnLogout.Dock = DockStyle.Fill;
             btnLogout.BackColor = Color.FromArgb(170, 50, 50);
             panelUserFooter.Controls.Add(btnLogout);
 
             panelSidebar.Controls.Add(flowMenu);
-            panelSidebar.Controls.Add(lblLogo);
+            panelSidebar.Controls.Add(panelBrand);
             panelSidebar.Controls.Add(panelUserFooter);
 
             // --- Ghép vào Form (thứ tự z-order quyết định cách Dock) ---
@@ -173,7 +206,7 @@ namespace MiniSupermarketWinForms
         }
 
         // ===== Nhúng form con vào panelMainContent =====
-        private void OpenChildForm(Form childForm, string screenTitle, Button senderButton)
+        private void OpenChildForm(Form childForm, string screenTitle, string breadcrumb, Button senderButton)
         {
             if (_activeForm != null)
             {
@@ -191,9 +224,15 @@ namespace MiniSupermarketWinForms
             panelMainContent.Controls.Add(childForm);
             panelMainContent.Tag = childForm;
 
+            if (lblBreadcrumb != null) lblBreadcrumb.Text = breadcrumb;
             lblTitle.Text = screenTitle;
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        private void OpenChildForm(Form childForm, string screenTitle, Button senderButton)
+        {
+            OpenChildForm(childForm, screenTitle, "Trang chủ  >  " + (senderButton?.Text?.Trim() ?? ""), senderButton);
         }
 
         // Làm nổi bật nút menu đang được chọn
@@ -252,7 +291,7 @@ namespace MiniSupermarketWinForms
         //    {
         //        case "ADMIN":
         //        case "WAREHOUSE":
-        //            OpenChildForm(new FormCategoryManagement(), "QUẢN LÝ DANH MỤC NHÓM HÀNG", btnCategory);
+        //            OpenChildForm(new FormCategoryManagement(), "DANH MỤC SẢN PHẨM & GIÁ - DANH MỤC", "Trang chủ  >  Danh mục", btnCategory);
         //            break;
 
         //        case "CASHIER":
@@ -267,26 +306,26 @@ namespace MiniSupermarketWinForms
             switch ((role ?? string.Empty).ToUpper())
             {
                 case "ADMIN":
-                    OpenChildForm(new FormCategoryManagement(), "QUẢN LÝ DANH MỤC NHÓM HÀNG", btnCategory);
+                    OpenChildForm(new FormCategoryManagement(), "DANH MỤC SẢN PHẨM & GIÁ - DANH MỤC", "Trang chủ  >  Danh mục", btnCategory);
                     break;
 
                 case "WAREHOUSE":
-                    OpenChildForm(new FormProductManagement(), "QUẢN LÝ THÔNG TIN SẢN PHẨM & KHO HÀNG", btnProduct);
+                    OpenChildForm(new FormProductManagement(), "QUẢN LÝ SẢN PHẨM", "Trang chủ  >  Sản phẩm", btnProduct);
                     break;
 
                 case "CASHIER":
-                    OpenChildForm(new FormPOS(), "BÁN HÀNG (POS)", btnPOS);
+                    OpenChildForm(new FormPOS(), "THU NGÂN & BÁN HÀNG (POS)", "Trang chủ  >  Bán hàng (POS)", btnPOS);
                     break;
             }
         }
         private void btnCategory_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormCategoryManagement(), "QUẢN LÝ DANH MỤC NHÓM HÀNG", btnCategory);
+            OpenChildForm(new FormCategoryManagement(), "QUẢN LÝ DANH MỤC", "Trang chủ  >  Danh mục", btnCategory);
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormCustomerManagement(), "QUẢN LÝ KHÁCH HÀNG & TÍCH ĐIỂM", btnCustomer);
+            OpenChildForm(new FormCustomerManagement(), "QUẢN LÝ KHÁCH HÀNG", "Trang chủ  >  Khách hàng", btnCustomer);
         }
 
         // Các màn hình dưới đây sẽ được làm ở các phần B, C, D
@@ -301,11 +340,11 @@ namespace MiniSupermarketWinForms
                 return;
             }
 
-            OpenChildForm(new FormPOS(), "BÁN HÀNG (POS)", btnPOS);
+            OpenChildForm(new FormPOS(), "THU NGÂN & BÁN HÀNG (POS)", "Trang chủ  >  Bán hàng (POS)", btnPOS);
         }
         private void btnProduct_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormProductManagement(), "QUẢN LÝ THÔNG TIN SẢN PHẨM & KHO HÀNG", btnProduct);
+            OpenChildForm(new FormProductManagement(), "QUẢN LÝ SẢN PHẨM", "Trang chủ  >  Sản phẩm", btnProduct);
         }
         private void btnReports_Click(object sender, EventArgs e)
         {
@@ -317,7 +356,7 @@ namespace MiniSupermarketWinForms
                 return;
             }
 
-            OpenChildForm(new FormQuickReport(), "BÁO CÁO DOANH THU & HIỆU SUẤT CA BÁN", btnReports);
+            OpenChildForm(new FormQuickReport(), "BÁO CÁO & THỐNG KÊ DOANH THU", "Trang chủ  >  Báo cáo doanh thu", btnReports);
         }
         private void btnUserManage_Click(object sender, EventArgs e)
         {
@@ -331,6 +370,8 @@ namespace MiniSupermarketWinForms
 
             OpenChildForm(new FormUserManagement(), "QUẢN TRỊ TÀI KHOẢN VÀ PHÂN QUYỀN HỆ THỐNG", btnUserManage);
         }
+
+
 
         private void ShowComingSoon(string screenName)
         {

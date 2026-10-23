@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -18,58 +18,62 @@ namespace MiniSupermarketWinForms
         public static string CurrentUsername { get; set; } = string.Empty;
     }
 
-    // Lớp tĩnh cung cấp các hàm gọi API dùng chung
+    // Lớp tĩnh cung cấp các hàm gọi API dùng chung (Buổi 5 + Buổi 6)
     public static class ApiClientService
     {
-        // Khởi tạo một thể hiện HttpClient dùng chung xuyên suốt ứng dụng
-        private static readonly HttpClient _client = new HttpClient
+        // HttpClient dùng chung cho toàn ứng dụng (Buổi 6)
+        public static readonly HttpClient Client = new HttpClient
         {
-            // Thiết lập địa chỉ gốc của Backend API (Thay thế port nếu backend của bạn chạy cổng khác)
+            // Thiết lập địa chỉ gốc của Backend API
             BaseAddress = new Uri("http://localhost:5000/api/")
         };
 
-        // Hàm gọi API đăng nhập và lấy Token
+        // Cập nhật Bearer Token sau khi đăng nhập thành công (Buổi 6)
+        public static void AttachToken(string token)
+        {
+            Client.DefaultRequestHeaders.Authorization = null;
+            if (!string.IsNullOrEmpty(token))
+            {
+                Client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", token);
+            }
+        }
+
+        // Alias cho AttachToken (tương thích cũ)
+        public static void SetBearerToken(string token) => AttachToken(token);
+
+        // Hàm gọi API đăng nhập và lấy Token (dùng bởi SessionManager gọi trực tiếp)
         public static async Task<bool> LoginAsync(string username, string password)
         {
-            // Đóng gói thông tin đăng nhập vào một object
             var loginObj = new { Username = username, Password = password };
-
-            // Gửi request POST tới endpoint auth/login
-            var response = await _client.PostAsJsonAsync("auth/login", loginObj);
+            var response = await Client.PostAsJsonAsync("auth/login", loginObj);
 
             if (response.IsSuccessStatusCode)
             {
-                // Nếu đăng nhập thành công, đọc kết quả JSON trả về
                 var jsonString = await response.Content.ReadAsStringAsync();
                 using (var doc = JsonDocument.Parse(jsonString))
                 {
-                    // Trích xuất Token và vai trò từ JSON và lưu vào SessionManager
                     SessionManager.JwtToken = doc.RootElement.GetProperty("token").GetString() ?? string.Empty;
                     SessionManager.CurrentRole = doc.RootElement.GetProperty("role").GetString() ?? string.Empty;
                 }
 
-                return true; // Đăng nhập thành công
+                AttachToken(SessionManager.JwtToken);
+                return true;
             }
 
-            return false; // Đăng nhập thất bại
+            return false;
         }
 
-        // Hàm gọi API lấy dữ liệu tĩnh, có gắn sẵn mã Token để Backend xác thực
+        // Hàm gọi API lấy dữ liệu tĩnh, gắn sẵn Token để Backend xác thực
         public static async Task<string> GetDataWithTokenAsync(string endpoint)
         {
-            // Gắn mã Token vào tiêu đề Authorization của mỗi Request
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", SessionManager.JwtToken);
-
-            // Gọi phương thức GET tới endpoint tương ứng
-            var response = await _client.GetAsync(endpoint);
+            var response = await Client.GetAsync(endpoint);
             if (response.IsSuccessStatusCode)
             {
-                // Nếu gọi thành công, trả về dữ liệu nguyên bản dạng chuỗi
                 return await response.Content.ReadAsStringAsync();
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                // Nếu Backend trả về 401 Unauthorized, nghĩa là mã Token đã hết hạn hoặc không hợp lệ
                 throw new Exception("Phiên làm việc hết hạn hoặc chưa đăng nhập!");
             }
 
