@@ -16,6 +16,7 @@ namespace MiniSupermarketWinForms
         private Button btnCustomer;
         private Button btnReports;
         private Button btnUserManage;
+        private Button btnRoleManage;
         private Panel panelUserFooter;
         private Button btnLogout;
 
@@ -113,9 +114,10 @@ namespace MiniSupermarketWinForms
             btnCustomer = CreateMenuButton("👥  Quản lý Khách hàng", btnCustomer_Click);
             btnReports = CreateMenuButton("📊  Báo cáo Doanh thu", btnReports_Click);
             btnUserManage = CreateMenuButton("🛡  Quản trị Tài khoản", btnUserManage_Click);
+            btnRoleManage = CreateMenuButton("👥  Quản lý Vai trò", btnRoleManage_Click);
             flowMenu.Controls.AddRange(new Control[]
             {
-                btnPOS, btnCategory, btnProduct, btnCustomer, btnReports, btnUserManage
+                btnPOS, btnCategory, btnProduct, btnCustomer, btnReports, btnUserManage, btnRoleManage
             });
 
             panelUserFooter = new Panel
@@ -211,7 +213,7 @@ namespace MiniSupermarketWinForms
 
         // ===== Phân quyền hiển thị theo vai trò =====
         // Thứ tự tham số: POS, Danh mục, Sản phẩm, Khách hàng, Báo cáo, Tài khoản
-        private void SetMenuVisible(bool pos, bool category, bool product, bool customer, bool reports, bool users)
+        private void SetMenuVisible(bool pos, bool category, bool product, bool customer, bool reports, bool users, bool roles)
         {
             btnPOS.Visible = pos;
             btnCategory.Visible = category;
@@ -219,6 +221,7 @@ namespace MiniSupermarketWinForms
             btnCustomer.Visible = customer;
             btnReports.Visible = reports;
             btnUserManage.Visible = users;
+            btnRoleManage.Visible = roles;
         }
 
         private bool ApplyRolePermissions(string role)
@@ -226,15 +229,15 @@ namespace MiniSupermarketWinForms
             switch ((role ?? string.Empty).ToUpper())
             {
                 case "ADMIN":
-                    SetMenuVisible(true, true, true, true, true, true);
+                    SetMenuVisible(true, true, true, true, true, true, true);
                     return true;
 
                 case "CASHIER":
-                    SetMenuVisible(true, false, false, true, false, false);
+                    SetMenuVisible(true, false, false, true, false, false, false);
                     return true;
 
                 case "WAREHOUSE":
-                    SetMenuVisible(false, true, true, false, false, false);
+                    SetMenuVisible(false, true, true, false, false, false, false);
                     return true;
 
                 default:
@@ -330,6 +333,18 @@ namespace MiniSupermarketWinForms
             }
 
             OpenChildForm(new FormUserManagement(), "QUẢN TRỊ TÀI KHOẢN VÀ PHÂN QUYỀN HỆ THỐNG", btnUserManage);
+        }
+
+        private void btnRoleManage_Click(object sender, EventArgs e)
+        {
+            if (SessionManager.CurrentRole != "Admin")
+            {
+                MessageBox.Show("Chỉ quản trị viên mới được quản lý vai trò!", "Từ chối",
+                    MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            OpenChildForm(new FormRoleManagement(), "QUẢN LÝ VAI TRÒ HỆ THỐNG", btnRoleManage);
         }
 
         private void ShowComingSoon(string screenName)
