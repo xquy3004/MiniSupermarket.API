@@ -64,137 +64,137 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             Id = 1,
-                            FullName = "Nguyễn Thị Quản Trị",
+                            FullName = "Nguyễn Quản Trị",
                             IsActive = true,
-                            PasswordHash = "admin@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Admin",
-                            Username = "admin"
+                            Username = "admin01"
                         },
                         new
                         {
                             Id = 2,
-                            FullName = "Trần Cửa Hàng Trưởng",
+                            FullName = "Trần Giám Đốc",
                             IsActive = true,
-                            PasswordHash = "manager@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Admin",
-                            Username = "manager01"
+                            Username = "admin02"
                         },
                         new
                         {
                             Id = 3,
-                            FullName = "Lê Thị Thu Ngân 1",
+                            FullName = "Lê Thu Ngân",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Cashier",
                             Username = "cashier01"
                         },
                         new
                         {
                             Id = 4,
-                            FullName = "Phạm Thị Thu Ngân 2",
+                            FullName = "Phạm Bán Hàng",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Cashier",
                             Username = "cashier02"
                         },
                         new
                         {
                             Id = 5,
-                            FullName = "Hoàng Thị Thu Ngân 3",
+                            FullName = "Hoàng Thu Ngân",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Cashier",
                             Username = "cashier03"
                         },
                         new
                         {
                             Id = 6,
-                            FullName = "Vũ Thị Thu Ngân 4",
+                            FullName = "Vũ Thị Quầy",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Cashier",
                             Username = "cashier04"
                         },
                         new
                         {
                             Id = 7,
-                            FullName = "Đỗ Thị Thu Ngân 5",
+                            FullName = "Đỗ Bán Lẻ",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Cashier",
                             Username = "cashier05"
                         },
                         new
                         {
                             Id = 8,
-                            FullName = "Ngô Thị Thu Ngân 6",
+                            FullName = "Ngô Quản Kho",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Warehouse",
+                            Username = "ware01"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            FullName = "Bùi Kiểm Kê",
+                            IsActive = true,
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Warehouse",
+                            Username = "ware02"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            FullName = "Dương Thủ Kho",
+                            IsActive = true,
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Warehouse",
+                            Username = "ware03"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            FullName = "Lý Nhập Hàng",
+                            IsActive = true,
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Warehouse",
+                            Username = "ware04"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            FullName = "Đặng Hỗ Trợ",
+                            IsActive = true,
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Admin",
+                            Username = "admin_backup"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            FullName = "Hồ Ca Chiều",
+                            IsActive = true,
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
                             Role = "Cashier",
                             Username = "cashier06"
                         },
                         new
                         {
-                            Id = 9,
-                            FullName = "Bùi Thị Thu Ngân 7",
-                            IsActive = true,
-                            PasswordHash = "cashier@123",
-                            Role = "Cashier",
-                            Username = "cashier07"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            FullName = "Đặng Văn Thủ Kho 1",
-                            IsActive = true,
-                            PasswordHash = "wh@123",
-                            Role = "Warehouse",
-                            Username = "warehouse01"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            FullName = "Trương Văn Thủ Kho 2",
-                            IsActive = true,
-                            PasswordHash = "wh@123",
-                            Role = "Warehouse",
-                            Username = "warehouse02"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            FullName = "Lý Thị Kiểm Kê",
-                            IsActive = true,
-                            PasswordHash = "wh@123",
-                            Role = "Warehouse",
-                            Username = "warehouse03"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            FullName = "Mai Thị Thu Ngân 8",
-                            IsActive = true,
-                            PasswordHash = "cashier@123",
-                            Role = "Cashier",
-                            Username = "cashier08"
-                        },
-                        new
-                        {
                             Id = 14,
-                            FullName = "Dương Thị Thu Ngân 9",
+                            FullName = "Trương Vận Chuyển",
                             IsActive = true,
-                            PasswordHash = "cashier@123",
-                            Role = "Cashier",
-                            Username = "cashier09"
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Warehouse",
+                            Username = "ware05"
                         },
                         new
                         {
                             Id = 15,
-                            FullName = "Hồ Thị Nhân Viên Nghỉ",
-                            IsActive = false,
-                            PasswordHash = "lock@123",
-                            Role = "Cashier",
-                            Username = "staff_lock"
+                            FullName = "Mai Giám Sát",
+                            IsActive = true,
+                            PasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=",
+                            Role = "Admin",
+                            Username = "supervisor"
                         });
                 });
 
@@ -627,7 +627,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             OrderId = 13,
-                            CashierUsername = "cashier07",
+                            CashierUsername = "cashier05",
                             CustomerId = 13,
                             OrderDate = new DateTime(2026, 10, 6, 15, 0, 0, 0, DateTimeKind.Unspecified),
                             PointsEarned = 28,
@@ -636,7 +636,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             OrderId = 14,
-                            CashierUsername = "cashier07",
+                            CashierUsername = "cashier06",
                             CustomerId = 14,
                             OrderDate = new DateTime(2026, 10, 7, 12, 10, 0, 0, DateTimeKind.Unspecified),
                             PointsEarned = 76,
@@ -1109,6 +1109,276 @@ namespace MiniSupermarket.API.Migrations
                             Price = 165000m,
                             ProductName = "Bộ đồ chơi xúc xắc gặm nướu an toàn cho bé 8 món",
                             StockQuantity = 75
+                        },
+                        new
+                        {
+                            ProductId = 21,
+                            Barcode = "MB001005",
+                            CategoryId = 1,
+                            Price = 530000m,
+                            ProductName = "Sữa bột Meiji số 0 (0-1 tuổi) hộp 800g nhập khẩu Nhật",
+                            StockQuantity = 35
+                        },
+                        new
+                        {
+                            ProductId = 22,
+                            Barcode = "MB001006",
+                            CategoryId = 1,
+                            Price = 465000m,
+                            ProductName = "Sữa bột Frisolac Gold số 2 (6-12 tháng) hộp 850g",
+                            StockQuantity = 15
+                        },
+                        new
+                        {
+                            ProductId = 23,
+                            Barcode = "MB002001",
+                            CategoryId = 2,
+                            Price = 36000m,
+                            ProductName = "Sữa tươi TH True Milk TOP KID hương dâu 180ml lốc 4",
+                            StockQuantity = 120
+                        },
+                        new
+                        {
+                            ProductId = 24,
+                            Barcode = "MB002002",
+                            CategoryId = 2,
+                            Price = 28000m,
+                            ProductName = "Sữa chua uống tiệt trùng Yomost vị cam lốc 4 hộp 170ml",
+                            StockQuantity = 80
+                        },
+                        new
+                        {
+                            ProductId = 25,
+                            Barcode = "MB002003",
+                            CategoryId = 2,
+                            Price = 55000m,
+                            ProductName = "Sữa hạt ngũ cốc dinh dưỡng Pororo Hàn Quốc lốc 3 hộp 190ml",
+                            StockQuantity = 40
+                        },
+                        new
+                        {
+                            ProductId = 26,
+                            Barcode = "MB003005",
+                            CategoryId = 3,
+                            Price = 385000m,
+                            ProductName = "Tã dán Merries nội địa Nhật size M (6-11kg) gói 64 miếng",
+                            StockQuantity = 18
+                        },
+                        new
+                        {
+                            ProductId = 27,
+                            Barcode = "MB003006",
+                            CategoryId = 3,
+                            Price = 410000m,
+                            ProductName = "Tã quần Moony Natural hữu cơ size L (9-14kg) gói 36 miếng",
+                            StockQuantity = 25
+                        },
+                        new
+                        {
+                            ProductId = 28,
+                            Barcode = "MB003007",
+                            CategoryId = 3,
+                            Price = 35000m,
+                            ProductName = "Khăn giấy khô đa năng siêu mềm Mama hộp 200 tờ",
+                            StockQuantity = 150
+                        },
+                        new
+                        {
+                            ProductId = 29,
+                            Barcode = "MB004004",
+                            CategoryId = 4,
+                            Price = 68000m,
+                            ProductName = "Bánh ăn dặm Gerber Graduate vị chuối dâu hộp 42g",
+                            StockQuantity = 70
+                        },
+                        new
+                        {
+                            ProductId = 30,
+                            Barcode = "MB004005",
+                            CategoryId = 4,
+                            Price = 25000m,
+                            ProductName = "Cháo tươi Cây Thị lươn đậu xanh dinh dưỡng gói 260g",
+                            StockQuantity = 90
+                        },
+                        new
+                        {
+                            ProductId = 31,
+                            Barcode = "MB004006",
+                            CategoryId = 4,
+                            Price = 62000m,
+                            ProductName = "Váng sữa Monte vị vani nhập khẩu Đức lốc 4 hộp 55g",
+                            StockQuantity = 110
+                        },
+                        new
+                        {
+                            ProductId = 32,
+                            Barcode = "MB005003",
+                            CategoryId = 5,
+                            Price = 120000m,
+                            ProductName = "Núm ty thay thế Pigeon siêu mềm cổ rộng size M vỉ 2 cái",
+                            StockQuantity = 50
+                        },
+                        new
+                        {
+                            ProductId = 33,
+                            Barcode = "MB005004",
+                            CategoryId = 5,
+                            Price = 175000m,
+                            ProductName = "Ti giả chỉnh nha Philips Avent Ultra Air ban đêm vỉ 2 cái",
+                            StockQuantity = 10
+                        },
+                        new
+                        {
+                            ProductId = 34,
+                            Barcode = "MB005005",
+                            CategoryId = 5,
+                            Price = 85000m,
+                            ProductName = "Nước rửa bình sữa và rau củ D-nee chai có vòi 620ml",
+                            StockQuantity = 65
+                        },
+                        new
+                        {
+                            ProductId = 35,
+                            Barcode = "MB006001",
+                            CategoryId = 6,
+                            Price = 145000m,
+                            ProductName = "Bộ chén muỗng tập ăn dặm báo nóng Richell Nhật Bản",
+                            StockQuantity = 40
+                        },
+                        new
+                        {
+                            ProductId = 36,
+                            Barcode = "MB006002",
+                            CategoryId = 6,
+                            Price = 490000m,
+                            ProductName = "Ghế ăn dặm gấp gọn nâng hạ độ cao Mastela cho bé",
+                            StockQuantity = 8
+                        },
+                        new
+                        {
+                            ProductId = 37,
+                            Barcode = "MB006003",
+                            CategoryId = 6,
+                            Price = 55000m,
+                            ProductName = "Yếm ăn dặm silicon cao cấp chống thấm có máng hứng",
+                            StockQuantity = 85
+                        },
+                        new
+                        {
+                            ProductId = 38,
+                            Barcode = "MB007004",
+                            CategoryId = 7,
+                            Price = 110000m,
+                            ProductName = "Phấn rôm tinh chất hoa cúc Chicco 150g chống rôm sảy",
+                            StockQuantity = 45
+                        },
+                        new
+                        {
+                            ProductId = 39,
+                            Barcode = "MB007005",
+                            CategoryId = 7,
+                            Price = 235000m,
+                            ProductName = "Sữa dưỡng ẩm toàn thân Cetaphil Baby Daily Lotion 400ml",
+                            StockQuantity = 12
+                        },
+                        new
+                        {
+                            ProductId = 40,
+                            Barcode = "MB008001",
+                            CategoryId = 8,
+                            Price = 45000m,
+                            ProductName = "Bàn chải đánh răng xỏ ngón silicon siêu mềm Richell",
+                            StockQuantity = 90
+                        },
+                        new
+                        {
+                            ProductId = 41,
+                            Barcode = "MB008002",
+                            CategoryId = 8,
+                            Price = 165000m,
+                            ProductName = "Kem đánh răng hữu cơ nuốt được Azetabio hương táo 50ml",
+                            StockQuantity = 35
+                        },
+                        new
+                        {
+                            ProductId = 42,
+                            Barcode = "MB008003",
+                            CategoryId = 8,
+                            Price = 95000m,
+                            ProductName = "Gạc rơ lưỡi tưa lưỡi thảo dược Dr.Papie hộp 30 gói",
+                            StockQuantity = 130
+                        },
+                        new
+                        {
+                            ProductId = 43,
+                            Barcode = "MB009002",
+                            CategoryId = 9,
+                            Price = 35000m,
+                            ProductName = "Bộ bao tay bao chân sơ sinh sợi tre Miomio kháng khuẩn",
+                            StockQuantity = 100
+                        },
+                        new
+                        {
+                            ProductId = 44,
+                            Barcode = "MB009003",
+                            CategoryId = 9,
+                            Price = 45000m,
+                            ProductName = "Mũ chụp sơ sinh bo viền Nous chất liệu Nu Petit co giãn",
+                            StockQuantity = 60
+                        },
+                        new
+                        {
+                            ProductId = 45,
+                            Barcode = "MB010001",
+                            CategoryId = 10,
+                            Price = 185000m,
+                            ProductName = "Gối chặn bông hạt xốp chống giật mình Uala Rogo cho bé",
+                            StockQuantity = 22
+                        },
+                        new
+                        {
+                            ProductId = 46,
+                            Barcode = "MB010002",
+                            CategoryId = 10,
+                            Price = 135000m,
+                            ProductName = "Khăn quấn ủ kén sơ sinh SwaddleMe cotton co giãn 4 chiều",
+                            StockQuantity = 14
+                        },
+                        new
+                        {
+                            ProductId = 47,
+                            Barcode = "MB012001",
+                            CategoryId = 12,
+                            Price = 890000m,
+                            ProductName = "Xe đẩy du lịch gấp gọn siêu nhẹ Seebaby QQ3 thoáng khí",
+                            StockQuantity = 6
+                        },
+                        new
+                        {
+                            ProductId = 48,
+                            Barcode = "MB012002",
+                            CategoryId = 12,
+                            Price = 1250000m,
+                            ProductName = "Địu em bé trợ lực 4 tư thế Ergobaby Omni 360 Cool Air",
+                            StockQuantity = 5
+                        },
+                        new
+                        {
+                            ProductId = 49,
+                            Barcode = "MB014001",
+                            CategoryId = 14,
+                            Price = 290000m,
+                            ProductName = "Đai nịt bụng định hình thoáng khí sau sinh Farlin",
+                            StockQuantity = 18
+                        },
+                        new
+                        {
+                            ProductId = 50,
+                            Barcode = "MB015001",
+                            CategoryId = 15,
+                            Price = 2350000m,
+                            ProductName = "Máy hút sữa điện đôi Spectra 9 Plus có pin tích điện",
+                            StockQuantity = 9
                         });
                 });
 

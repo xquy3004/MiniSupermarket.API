@@ -55,24 +55,27 @@ namespace MiniSupermarket.API.Data
             // =========================================================================
 
             // ------------------------------------------------------------------
-            // 1. DATA SEEDING: BẢNG USERS (15 nhân viên – 3 vai trò)
+            // 1. DATA SEEDING: BẢNG USERS (15 nhân viên – 3 vai trò khớp đề Buổi 4)
+            // Mật khẩu mặc định: 123456 (được băm PBKDF2 cố định cho HasData)
             // ------------------------------------------------------------------
+            const string defaultPasswordHash = "100000.JeUlHG5fcACNOYexkxBP6g==.C/s1aX+xcAsQWA+xErOZldBd5iwYYlzn9/WrcyzGVjA=";
+
             modelBuilder.Entity<AppUser>().HasData(
-                new AppUser { Id =  1, Username = "admin",        PasswordHash = "admin@123",   FullName = "Nguyễn Thị Quản Trị",   Role = "Admin",     IsActive = true  },
-                new AppUser { Id =  2, Username = "manager01",    PasswordHash = "manager@123", FullName = "Trần Cửa Hàng Trưởng",  Role = "Admin",     IsActive = true  },
-                new AppUser { Id =  3, Username = "cashier01",    PasswordHash = "cashier@123", FullName = "Lê Thị Thu Ngân 1",     Role = "Cashier",   IsActive = true  },
-                new AppUser { Id =  4, Username = "cashier02",    PasswordHash = "cashier@123", FullName = "Phạm Thị Thu Ngân 2",   Role = "Cashier",   IsActive = true  },
-                new AppUser { Id =  5, Username = "cashier03",    PasswordHash = "cashier@123", FullName = "Hoàng Thị Thu Ngân 3",  Role = "Cashier",   IsActive = true  },
-                new AppUser { Id =  6, Username = "cashier04",    PasswordHash = "cashier@123", FullName = "Vũ Thị Thu Ngân 4",     Role = "Cashier",   IsActive = true  },
-                new AppUser { Id =  7, Username = "cashier05",    PasswordHash = "cashier@123", FullName = "Đỗ Thị Thu Ngân 5",     Role = "Cashier",   IsActive = true  },
-                new AppUser { Id =  8, Username = "cashier06",    PasswordHash = "cashier@123", FullName = "Ngô Thị Thu Ngân 6",    Role = "Cashier",   IsActive = true  },
-                new AppUser { Id =  9, Username = "cashier07",    PasswordHash = "cashier@123", FullName = "Bùi Thị Thu Ngân 7",    Role = "Cashier",   IsActive = true  },
-                new AppUser { Id = 10, Username = "warehouse01",  PasswordHash = "wh@123",      FullName = "Đặng Văn Thủ Kho 1",    Role = "Warehouse", IsActive = true  },
-                new AppUser { Id = 11, Username = "warehouse02",  PasswordHash = "wh@123",      FullName = "Trương Văn Thủ Kho 2",  Role = "Warehouse", IsActive = true  },
-                new AppUser { Id = 12, Username = "warehouse03",  PasswordHash = "wh@123",      FullName = "Lý Thị Kiểm Kê",        Role = "Warehouse", IsActive = true  },
-                new AppUser { Id = 13, Username = "cashier08",    PasswordHash = "cashier@123", FullName = "Mai Thị Thu Ngân 8",    Role = "Cashier",   IsActive = true  },
-                new AppUser { Id = 14, Username = "cashier09",    PasswordHash = "cashier@123", FullName = "Dương Thị Thu Ngân 9",  Role = "Cashier",   IsActive = true  },
-                new AppUser { Id = 15, Username = "staff_lock",   PasswordHash = "lock@123",    FullName = "Hồ Thị Nhân Viên Nghỉ", Role = "Cashier",   IsActive = false }
+                new AppUser { Id =  1, Username = "admin01",      PasswordHash = defaultPasswordHash, FullName = "Nguyễn Quản Trị",    Role = "Admin",     IsActive = true },
+                new AppUser { Id =  2, Username = "admin02",      PasswordHash = defaultPasswordHash, FullName = "Trần Giám Đốc",     Role = "Admin",     IsActive = true },
+                new AppUser { Id =  3, Username = "cashier01",    PasswordHash = defaultPasswordHash, FullName = "Lê Thu Ngân",       Role = "Cashier",   IsActive = true },
+                new AppUser { Id =  4, Username = "cashier02",    PasswordHash = defaultPasswordHash, FullName = "Phạm Bán Hàng",     Role = "Cashier",   IsActive = true },
+                new AppUser { Id =  5, Username = "cashier03",    PasswordHash = defaultPasswordHash, FullName = "Hoàng Thu Ngân",    Role = "Cashier",   IsActive = true },
+                new AppUser { Id =  6, Username = "cashier04",    PasswordHash = defaultPasswordHash, FullName = "Vũ Thị Quầy",       Role = "Cashier",   IsActive = true },
+                new AppUser { Id =  7, Username = "cashier05",    PasswordHash = defaultPasswordHash, FullName = "Đỗ Bán Lẻ",         Role = "Cashier",   IsActive = true },
+                new AppUser { Id =  8, Username = "ware01",       PasswordHash = defaultPasswordHash, FullName = "Ngô Quản Kho",      Role = "Warehouse", IsActive = true },
+                new AppUser { Id =  9, Username = "ware02",       PasswordHash = defaultPasswordHash, FullName = "Bùi Kiểm Kê",      Role = "Warehouse", IsActive = true },
+                new AppUser { Id = 10, Username = "ware03",       PasswordHash = defaultPasswordHash, FullName = "Dương Thủ Kho",     Role = "Warehouse", IsActive = true },
+                new AppUser { Id = 11, Username = "ware04",       PasswordHash = defaultPasswordHash, FullName = "Lý Nhập Hàng",      Role = "Warehouse", IsActive = true },
+                new AppUser { Id = 12, Username = "admin_backup", PasswordHash = defaultPasswordHash, FullName = "Đặng Hỗ Trợ",       Role = "Admin",     IsActive = true },
+                new AppUser { Id = 13, Username = "cashier06",    PasswordHash = defaultPasswordHash, FullName = "Hồ Ca Chiều",       Role = "Cashier",   IsActive = true },
+                new AppUser { Id = 14, Username = "ware05",       PasswordHash = defaultPasswordHash, FullName = "Trương Vận Chuyển", Role = "Warehouse", IsActive = true },
+                new AppUser { Id = 15, Username = "supervisor",   PasswordHash = defaultPasswordHash, FullName = "Mai Giám Sát",      Role = "Admin",     IsActive = true }
             );
 
             // ------------------------------------------------------------------
@@ -199,8 +202,8 @@ namespace MiniSupermarket.API.Data
                 new Order { OrderId = 10, OrderDate = new DateTime(2026, 10, 5, 10, 50, 0), CustomerId = 10, CashierUsername = "cashier05", TotalAmount =  245000m, PointsEarned = 24 },
                 new Order { OrderId = 11, OrderDate = new DateTime(2026, 10, 5, 17, 15, 0), CustomerId = 11, CashierUsername = "cashier06", TotalAmount =  195000m, PointsEarned = 19 },
                 new Order { OrderId = 12, OrderDate = new DateTime(2026, 10, 6,  8, 20, 0), CustomerId = 12, CashierUsername = "cashier06", TotalAmount = 1010000m, PointsEarned = 101 },
-                new Order { OrderId = 13, OrderDate = new DateTime(2026, 10, 6, 15,  0, 0), CustomerId = 13, CashierUsername = "cashier07", TotalAmount =  280000m, PointsEarned = 28 },
-                new Order { OrderId = 14, OrderDate = new DateTime(2026, 10, 7, 12, 10, 0), CustomerId = 14, CashierUsername = "cashier07", TotalAmount =  760000m, PointsEarned = 76 },
+                new Order { OrderId = 13, OrderDate = new DateTime(2026, 10, 6, 15,  0, 0), CustomerId = 13, CashierUsername = "cashier05", TotalAmount =  280000m, PointsEarned = 28 },
+                new Order { OrderId = 14, OrderDate = new DateTime(2026, 10, 7, 12, 10, 0), CustomerId = 14, CashierUsername = "cashier06", TotalAmount =  760000m, PointsEarned = 76 },
                 new Order { OrderId = 15, OrderDate = new DateTime(2026, 10, 7, 18, 45, 0), CustomerId = 15, CashierUsername = "cashier01", TotalAmount =  165000m, PointsEarned = 16 }
             );
 
