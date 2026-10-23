@@ -30,6 +30,50 @@ namespace MiniSupermarket.API.Controllers
             return Ok(list);
         }
 
+        // 1b. Paged: Phân trang danh mục sản phẩm kèm tìm kiếm từ khóa
+        // GET: api/categories/paged?keyword=...&pageNumber=1&pageSize=5
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged(
+            [FromQuery] string? keyword,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 5)
+        {
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1 || pageSize > 50) pageSize = 5;
+
+            var query = _context.Categories
+                .AsNoTracking()
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string search = keyword.Trim().ToLower();
+                query = query.Where(c => c.CategoryName.ToLower().Contains(search)
+                                      || (c.Description != null && c.Description.ToLower().Contains(search)));
+            }
+
+            int totalItems = await query.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            if (totalPages == 0) totalPages = 1;
+
+            var items = await query
+                .OrderBy(c => c.CategoryId)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var response = new PagedResult<Category>
+            {
+                CurrentPage = pageNumber,
+                PageSize = pageSize,
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                Items = items
+            };
+
+            return Ok(response);
+        }
+
         // 2. READ: Lấy nhóm hàng theo ID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
