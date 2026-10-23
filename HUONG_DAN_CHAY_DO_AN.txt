@@ -1,0 +1,71 @@
+========================================================================
+HƯỚNG DẪN KHỞI CHẠY HỆ THỐNG SIÊU THỊ MẸ & BÉ BABY CARE STORE
+========================================================================
+Sinh viên: Nguyễn Xuân Quý - MSSV: 2124110252 - Lớp: CCQ2411C
+Đề tài: Nghiên cứu Kiến trúc RESTful Web API - Quản lý Siêu thị Mini Mẹ & Bé
+
+------------------------------------------------------------------------
+CÁCH 1: CHẠY TRỰC TIẾP NHANH BẰNG FILE .EXE (KHÔNG CẦN CẤU HÌNH VS)
+------------------------------------------------------------------------
+Bước 1: Chạy Backend Web API (Cổng 5000):
+   - Mở thư mục: MiniSupermarket.API\bin\Debug\net8.0\
+   - Nhấp đúp chạy: MiniSupermarket.API.exe
+   - (Cửa sổ Kestrel màu đen sẽ hiện lên lắng nghe cổng http://localhost:5000)
+
+Bước 2: Chạy Frontend WinForms:
+   - Mở thư mục: MiniSupermarketWinForms\bin\Debug\
+   - Nhấp đúp chạy: MiniSupermarketWinForms.exe
+   - Giao diện đăng nhập Baby Care Store hiện đại sẽ xuất hiện ngay lập tức!
+
+------------------------------------------------------------------------
+CÁCH 2: CHẠY BẰNG VISUAL STUDIO 2022
+------------------------------------------------------------------------
+Bước 1: Nhấp đúp mở file solution: MiniSupermarket.API.sln
+
+Bước 2: Cấu hình chạy đồng thời cả Backend và WinForms (Multiple Startup Projects):
+   1. Nhấp chuột phải vào dòng đầu tiên: "Solution 'MiniSupermarket.API' (3 of 3 projects)" trong Solution Explorer.
+   2. Chọn "Properties" (hoặc "Configure Startup Projects...").
+   3. Chọn mục "Multiple startup projects":
+      - MiniSupermarket.API        --> Action: Start
+      - MiniSupermarketWinForms    --> Action: Start
+   4. Bấm Apply --> OK.
+   5. Bấm nút "Start" (F5) màu xanh trên thanh công cụ.
+
+(Hoặc nếu chỉ muốn chạy giao diện WinForms khi API đã bật:
+ Nhấp chuột phải vào MiniSupermarketWinForms --> Chọn "Set as Startup Project" --> Bấm Start F5).
+
+------------------------------------------------------------------------
+DANH SÁCH 15 TÀI KHOẢN ĐĂNG NHẬP MẪU (MẬT KHẨU CHUNG: 123456)
+------------------------------------------------------------------------
+1. Vai trò Quản trị viên (Admin - Thấy toàn bộ menu quản lý & Báo cáo):
+   - admin01        (Nguyễn Quản Trị)
+   - admin02        (Trần Giám Đốc)
+   - admin_backup   (Đặng Hỗ Trợ)
+   - supervisor     (Mai Giám Sát)
+
+2. Vai trò Thu ngân (Cashier - Chỉ thấy Bán hàng POS & Khách hàng):
+   - cashier01      (Lê Thu Ngân)
+   - cashier02      (Phạm Bán Hàng)
+   - cashier03      (Hoàng Thu Ngân)
+   - cashier04      (Vũ Thị Quầy)
+   - cashier05      (Đỗ Bán Lẻ)
+   - cashier06      (Hồ Ca Chiều)
+
+3. Vai trò Quản lý kho (Warehouse - Chỉ thấy Quản lý Danh mục & Sản phẩm):
+   - ware01         (Ngô Quản Kho)
+   - ware02         (Bùi Kiểm Kê)
+   - ware03         (Dương Thủ Kho)
+   - ware04         (Lý Nhập Hàng)
+   - ware05         (Trương Vận Chuyển)
+
+------------------------------------------------------------------------
+CÁC MÃ VẠCH MẪU ĐỂ TEST QUÉT MÃ BÁN HÀNG TẠI QUẦY POS
+------------------------------------------------------------------------
+- MB001001 : Sữa bột NAN Optipro 1 (0-6 tháng) hộp 800g (Giá: 465.000 đ)
+- MB001002 : Sữa bột Meiji Hohoemi số 0 (0-1 tuổi) lon 800g (Giá: 520.000 đ)
+- MB002001 : Bỉm dán Pampers Premium Protection Newborn 76 miếng (Giá: 310.000 đ)
+- MB002002 : Tã quần Huggies Platinum Nature Made size M 64 miếng (Giá: 375.000 đ)
+- MB003001 : Bột ăn dặm Nestlé Cerelac Gạo & Sữa lúa mì (Giá: 78.000 đ)
+- MB004001 : Bình sữa Pigeon PPSU nội địa Nhật 240ml (Giá: 385.000 đ)
+- MB005001 : Sữa tắm gội 2 trong 1 Chicco hoa cúc 500ml (Giá: 275.000 đ)
+========================================================================
