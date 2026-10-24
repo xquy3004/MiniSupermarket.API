@@ -936,7 +936,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 1,
-                            Barcode = "MB003001",
+                            Barcode = "893456789001",
                             CategoryId = 3,
                             Price = 195000m,
                             ProductName = "Tã dán Pampers Newborn size NB (dưới 5kg) – 84 miếng",
@@ -945,7 +945,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 2,
-                            Barcode = "MB003002",
+                            Barcode = "893456789002",
                             CategoryId = 3,
                             Price = 185000m,
                             ProductName = "Tã quần Huggies Dry size M (6-11kg) – 48 miếng",
@@ -954,7 +954,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 3,
-                            Barcode = "MB003003",
+                            Barcode = "893456789003",
                             CategoryId = 3,
                             Price = 135000m,
                             ProductName = "Tã dán Bobby Newborn size S (3-6kg) – 56 miếng",
@@ -963,7 +963,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 4,
-                            Barcode = "MB003004",
+                            Barcode = "893456789004",
                             CategoryId = 3,
                             Price = 42000m,
                             ProductName = "Khăn ướt Bobby không mùi hộp 100 tờ",
@@ -972,7 +972,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 5,
-                            Barcode = "MB001001",
+                            Barcode = "893456789005",
                             CategoryId = 1,
                             Price = 520000m,
                             ProductName = "Sữa bột NAN Optipro 1 (0-6 tháng) hộp 800g",
@@ -981,7 +981,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 6,
-                            Barcode = "MB001002",
+                            Barcode = "893456789006",
                             CategoryId = 1,
                             Price = 490000m,
                             ProductName = "Sữa bột Enfamil A+ số 2 (6-12 tháng) hộp 900g",
@@ -990,7 +990,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 7,
-                            Barcode = "MB001003",
+                            Barcode = "893456789007",
                             CategoryId = 1,
                             Price = 480000m,
                             ProductName = "Sữa bột Aptamil số 3 (1-3 tuổi) hộp 800g",
@@ -999,7 +999,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 8,
-                            Barcode = "MB001004",
+                            Barcode = "893456789008",
                             CategoryId = 1,
                             Price = 320000m,
                             ProductName = "Sữa bột Dielac Alpha Step 1 (0-6 tháng) hộp 900g",
@@ -1008,7 +1008,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 9,
-                            Barcode = "MB004001",
+                            Barcode = "893456789009",
                             CategoryId = 4,
                             Price = 85000m,
                             ProductName = "Bột ăn dặm Heinz vị gạo sữa loại 200g",
@@ -1017,7 +1017,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 10,
-                            Barcode = "MB004002",
+                            Barcode = "893456789010",
                             CategoryId = 4,
                             Price = 38000m,
                             ProductName = "Cháo tươi ăn dặm Nutricare gà rau củ hộp 200g",
@@ -1026,7 +1026,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 11,
-                            Barcode = "MB004003",
+                            Barcode = "893456789011",
                             CategoryId = 4,
                             Price = 65000m,
                             ProductName = "Váng sữa Petit Suisse Yoplait vị dâu lốc 6 hộp",
@@ -1035,7 +1035,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 12,
-                            Barcode = "MB005001",
+                            Barcode = "893456789012",
                             CategoryId = 5,
                             Price = 185000m,
                             ProductName = "Bình sữa Pigeon PPSU cổ rộng 160ml",
@@ -1044,7 +1044,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 13,
-                            Barcode = "MB005002",
+                            Barcode = "893456789013",
                             CategoryId = 5,
                             Price = 245000m,
                             ProductName = "Bình sữa Dr. Brown's chống sặc 250ml",
@@ -1053,7 +1053,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 14,
-                            Barcode = "MB007001",
+                            Barcode = "893456789014",
                             CategoryId = 7,
                             Price = 95000m,
                             ProductName = "Sữa tắm gội Pigeon 2 trong 1 hương hoa quả 200ml",
@@ -1062,7 +1062,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 15,
-                            Barcode = "MB007002",
+                            Barcode = "893456789015",
                             CategoryId = 7,
                             Price = 125000m,
                             ProductName = "Kem chống hăm Bepanthen Baby 30g",
@@ -1071,7 +1071,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 16,
-                            Barcode = "MB007003",
+                            Barcode = "893456789016",
                             CategoryId = 7,
                             Price = 78000m,
                             ProductName = "Dầu massage Johnson's Baby 200ml",
@@ -1080,7 +1080,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 17,
-                            Barcode = "MB009001",
+                            Barcode = "893456789017",
                             CategoryId = 9,
                             Price = 280000m,
                             ProductName = "Bộ bodysuit cotton sơ sinh 5 bộ size 0-3 tháng",
@@ -1089,7 +1089,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 18,
-                            Barcode = "MB013001",
+                            Barcode = "893456789018",
                             CategoryId = 13,
                             Price = 450000m,
                             ProductName = "Sữa bầu Enfamama A+ hộp 900g",
@@ -1098,7 +1098,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 19,
-                            Barcode = "MB013002",
+                            Barcode = "893456789019",
                             CategoryId = 13,
                             Price = 380000m,
                             ProductName = "Vitamin tổng hợp Blackmores Pregnancy & Breast-feeding 60 viên",
@@ -1107,7 +1107,7 @@ namespace MiniSupermarket.API.Migrations
                         new
                         {
                             ProductId = 20,
-                            Barcode = "MB011001",
+                            Barcode = "893456789020",
                             CategoryId = 11,
                             Price = 165000m,
                             ProductName = "Bộ đồ chơi xúc xắc gặm nướu an toàn cho bé 8 món",

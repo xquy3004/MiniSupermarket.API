@@ -74,14 +74,16 @@ Tất cả tài khoản mẫu được nạp tự động qua Migration theo đ�
 ## 🏷️ 4. BỘ MÃ VẠCH MẪU ĐỂ TEST QUÉT MÃ TẠI QUẦY POS
 | Mã vạch (Barcode) | Tên mặt hàng (Chuyên ngành Mẹ & Bé) | Nhóm hàng | Đơn giá | Tồn kho mồi |
 | :---: | :--- | :--- | :---: | :---: |
-| `MB001001` | Sữa bột NAN Optipro 1 (0-6 tháng) hộp 800g | Sữa bột & Sữa công thức | 520.000 đ | 45 |
-| `MB001002` | Sữa bột Enfamil A+ số 2 (6-12 tháng) hộp 900g | Sữa bột & Sữa công thức | 490.000 đ | 50 |
-| `MB001003` | Sữa bột Aptamil số 3 (1-3 tuổi) hộp 800g | Sữa bột & Sữa công thức | 480.000 đ | 40 |
-| `MB002001` | Bỉm dán Pampers Premium Protection NB 76 miếng | Bỉm, Tã & Khăn ướt | 310.000 đ | 85 |
-| `MB002002` | Tã quần Huggies Platinum Nature Made size M 64 miếng | Bỉm, Tã & Khăn ướt | 375.000 đ | 70 |
-| `MB003001` | Bột ăn dặm Nestlé Cerelac Gạo & Sữa lúa mì 200g | Đồ ăn dặm & Bột ăn dặm | 78.000 đ | 90 |
-| `MB004001` | Bình sữa Pigeon PPSU nội địa Nhật 240ml | Bình sữa & Núm ty | 385.000 đ | 55 |
-| `MB005001` | Sữa tắm gội 2 trong 1 Chicco hoa cúc 500ml | Tắm gội & Chăm sóc da bé | 275.000 đ | 60 |
+| `893456789001` | Tã dán Pampers Newborn size NB (dưới 5kg) – 84 miếng | Bỉm, Tã & Khăn ướt | 195.000 đ | 85 |
+| `893456789002` | Tã quần Huggies Dry size M (6-11kg) – 48 miếng | Bỉm, Tã & Khăn ướt | 185.000 đ | 70 |
+| `893456789003` | Tã dán Bobby Newborn size S (3-6kg) – 56 miếng | Bỉm, Tã & Khăn ướt | 135.000 đ | 120 |
+| `893456789004` | Khăn ướt Bobby không mùi hộp 100 tờ | Bỉm, Tã & Khăn ướt | 42.000 đ | 200 |
+| `893456789005` | Sữa bột NAN Optipro 1 (0-6 tháng) hộp 800g | Sữa bột & Sữa công thức | 520.000 đ | 45 |
+| `893456789006` | Sữa bột Enfamil A+ số 2 (6-12 tháng) hộp 900g | Sữa bột & Sữa công thức | 490.000 đ | 50 |
+| `893456789007` | Sữa bột Aptamil số 3 (1-3 tuổi) hộp 800g | Sữa bột & Sữa công thức | 480.000 đ | 40 |
+| `893456789008` | Sữa bột Dielac Alpha Step 1 (0-6 tháng) hộp 900g | Sữa bột & Sữa công thức | 320.000 đ | 60 |
+| `893456789009` | Bột ăn dặm Heinz vị gạo sữa loại 200g | Đồ ăn dặm | 85.000 đ | 90 |
+| `893456789012` | Bình sữa Pigeon PPSU cổ rộng 160ml | Bình sữa & Núm ty | 185.000 đ | 55 |
 
 ---
 

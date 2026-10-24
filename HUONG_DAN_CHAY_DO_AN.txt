@@ -61,11 +61,11 @@ DANH SÁCH 15 TÀI KHOẢN ĐĂNG NHẬP MẪU (MẬT KHẨU CHUNG: 123456)
 ------------------------------------------------------------------------
 CÁC MÃ VẠCH MẪU ĐỂ TEST QUÉT MÃ BÁN HÀNG TẠI QUẦY POS
 ------------------------------------------------------------------------
-- MB001001 : Sữa bột NAN Optipro 1 (0-6 tháng) hộp 800g (Giá: 465.000 đ)
-- MB001002 : Sữa bột Meiji Hohoemi số 0 (0-1 tuổi) lon 800g (Giá: 520.000 đ)
-- MB002001 : Bỉm dán Pampers Premium Protection Newborn 76 miếng (Giá: 310.000 đ)
-- MB002002 : Tã quần Huggies Platinum Nature Made size M 64 miếng (Giá: 375.000 đ)
-- MB003001 : Bột ăn dặm Nestlé Cerelac Gạo & Sữa lúa mì (Giá: 78.000 đ)
-- MB004001 : Bình sữa Pigeon PPSU nội địa Nhật 240ml (Giá: 385.000 đ)
-- MB005001 : Sữa tắm gội 2 trong 1 Chicco hoa cúc 500ml (Giá: 275.000 đ)
+- 893456789001 : Tã dán Pampers Newborn size NB (dưới 5kg) – 84 miếng (Giá: 195.000 đ)
+- 893456789002 : Tã quần Huggies Dry size M (6-11kg) – 48 miếng (Giá: 185.000 đ)
+- 893456789003 : Tã dán Bobby Newborn size S (3-6kg) – 56 miếng (Giá: 135.000 đ)
+- 893456789004 : Khăn ướt Bobby không mùi hộp 100 tờ (Giá: 42.000 đ)
+- 893456789005 : Sữa bột NAN Optipro 1 (0-6 tháng) hộp 800g (Giá: 520.000 đ)
+- 893456789006 : Sữa bột Enfamil A+ số 2 (6-12 tháng) hộp 900g (Giá: 490.000 đ)
+- 893456789012 : Bình sữa Pigeon PPSU cổ rộng 160ml (Giá: 185.000 đ)
 ========================================================================

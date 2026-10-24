@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\MiniSupermarket.API.props" />
-</Project>

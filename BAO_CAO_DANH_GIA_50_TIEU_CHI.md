@@ -43,7 +43,7 @@
 | **29** | Chặn API khi chưa đăng nhập (401) | **2** | Gắn `[Authorize]` trên Controller; gọi `GET /api/categories` không có Token trả về đúng `HTTP 401 Unauthorized` kèm header `WWW-Authenticate: Bearer`. | Cơ chế bảo vệ Endpoint hoạt động chuẩn mực. |
 | **30** | Phân quyền theo vai trò (Role-based) | **2** | `GET /api/users` gắn `[Authorize(Roles = "Admin")]`: Admin gọi trả HTTP 200; Cashier và Warehouse gọi trả đúng `HTTP 403 Forbidden`. | Phân quyền RBAC hoạt động chính xác theo 3 vai trò. |
 | **31** | Gắn Token khi kiểm thử Swagger | **2** | Program.cs:22-35 cấu hình Security Definition Bearer; Swagger UI có nút ổ khóa "Authorize", dán JWT gọi thông suốt các API bảo mật. | Đã tích hợp UI bảo mật trên Swagger theo chuẩn OpenAPI. |
-| **32** | Tra cứu Barcode bằng ADO.NET | **2** | `GET /api/ado-products/barcode/MB001001` qua `SqlConnection`/`SqlCommand` trả về HTTP 200 thông tin sản phẩm; barcode sai trả đúng HTTP 404. | Tra cứu mã vạch ADO.NET thuần phản hồi nhanh chóng. |
+| **32** | Tra cứu Barcode bằng ADO.NET | **2** | `GET /api/ado-products/barcode/893456789001` qua `SqlConnection`/`SqlCommand` trả về HTTP 200 thông tin sản phẩm; barcode sai trả đúng HTTP 404. | Tra cứu mã vạch ADO.NET thuần phản hồi nhanh chóng. |
 | **33** | Đọc bằng SqlDataReader & Chống SQL Injection | **2** | AdoProductController.cs:64-75 dùng `SqlDataReader` bọc trong `using`; toàn bộ tham số dùng `Parameters.AddWithValue`, không cộng chuỗi SQL. | Chống Injection tuyệt đối và giải phóng tài nguyên bằng `using`. |
 | **34** | Chạy Stored Procedure báo cáo | **1** | Đã tạo thủ tục `sp_GetRevenueByCashier` trong file script `Buoi5_StoredProcedures.sql`, nhưng trong ReportsController.cs:128 lại dùng LINQ EF Core thay vì `CommandType.StoredProcedure`. | Chuyển code C# trong action `revenue-by-cashier` sang gọi SP bằng ADO.NET. |
 | **35** | Thanh toán bọc trong Transaction & Rollback | **2** | CheckoutController.cs:57-220 bọc trong `SqlTransaction`; test mua vượt tồn kho (99999) lập tức Rollback và trả HTTP 400, không sinh đơn rác. | Đảm bảo tính toàn vẹn dữ liệu chuẩn ACID. |
@@ -109,7 +109,7 @@
 - Bước 3: Đăng xuất, đăng nhập `admin01` / `123456` -> Menu đầy đủ 6 nút.
 - Bước 4: Bấm chuyển các form con -> Nạp mượt mà trong Panel giữa.
 - Bước 5: Mở Quản lý Sản phẩm -> Tìm kiếm `bột`, phân trang trang 1, trang 2.
-- Bước 6: Mở POS -> Quét `MB001001` (Sữa NAN) 2 lần -> Giỏ hàng cộng dồn, nhập tiền khách đưa -> Ra tiền thối.
+- Bước 6: Mở POS -> Quét `893456789001` (Sữa NAN) 2 lần -> Giỏ hàng cộng dồn, nhập tiền khách đưa -> Ra tiền thối.
 - Bước 7: Bấm Thanh toán -> Thông báo thành công tiếng Việt, giỏ hàng làm mới.
 
 ---
@@ -117,7 +117,7 @@
 ### B. Kịch bản Demo Báo cáo Đồ án (7 - 10 Phút)
 - Phút 0 - 1: Giới thiệu đề tài Baby Care Store, chỉ rõ 2 project trong Solution, mở Swagger UI.
 - Phút 1 - 3: Chứng minh JWT & RBAC (Swagger 401 khi không token, đăng nhập WinForms tài khoản Cashier và Admin).
-- Phút 3 - 6: Bán hàng tại POS (quét `MB001001`, chọn khách hàng tích điểm, nhập tiền khách, bấm Thanh toán).
+- Phút 3 - 6: Bán hàng tại POS (quét `893456789001`, chọn khách hàng tích điểm, nhập tiền khách, bấm Thanh toán).
 - Phút 6 - 8: Đối chiếu SQL Server thật (Order tạo mới, trừ tồn kho từ 45 xuống 43, cộng điểm tích lũy trong cùng 1 SqlTransaction).
 - Phút 8 - 10: Xem Báo cáo Top 5 sản phẩm bán chạy và Doanh thu ca.
 
